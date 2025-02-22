@@ -19,12 +19,4 @@ resource "aws_ssm_parameter" "rds_name" {
   value = aws_db_instance.my_bucket_list.identifier
 }
 
-resource "aws_ssm_parameter" "rds_endpoint" {
-  name  = "rds-name"
-  type  = "String"
-  value = aws_db_instance.my_bucket_list.endpoint
-}
-
-
-
 

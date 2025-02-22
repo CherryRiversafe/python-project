@@ -7,6 +7,11 @@ terraform{
             source = "hashicorp/random"
         }
     }
+    backend "s3" {
+        bucket = "bucketlist-tfstate-holder"
+        key = "tf-state"
+        region = "eu-west-2"
+    }
 }
 provider "aws" {
   region     = var.aws_region
