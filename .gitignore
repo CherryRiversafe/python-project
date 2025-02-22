@@ -1,0 +1,12 @@
+# Created by venv; see https://docs.python.org/3/library/venv.html
+.venv
+.env
+*.tfvars
+/node_modules
+*.tfstate*
+tfplan
+/backend/__pycache__
+/backend/.pytest_cache
+/terraform/.terraform
+.terraform.lock.hcl
+*.ps1
