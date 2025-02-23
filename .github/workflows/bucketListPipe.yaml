@@ -20,6 +20,10 @@ env:
   DOCKER_NAME: ${{secrets.DOCKER_ACCESS_TOKEN_NAME}}
   DOCKER_TOKEN: ${{secrets.DOCKER_ACCESS_TOKEN_KEY}}
 
+permissions:
+      id-token: write
+      contents: read 
+
 
 jobs:
   terraform:
