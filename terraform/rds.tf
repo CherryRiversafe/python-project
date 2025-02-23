@@ -24,6 +24,7 @@ resource "aws_secretsmanager_secret" "db_user" {
   }
 }
 
+
 resource "aws_secretsmanager_secret_version" "api_user" {
   secret_id     = aws_secretsmanager_secret.db_user.id
   secret_string = var.db_username
@@ -35,7 +36,7 @@ resource "aws_db_instance" "my_bucket_list" {
   instance_class         = "db.t3.micro"
   allocated_storage      = 5
   engine                 = "postgres"
-  username               = "db_user"
+  username               = var.db_username
   password               = aws_secretsmanager_secret_version.rds_password_secret_version.secret_string
   vpc_security_group_ids = [aws_security_group.rds_sec_group.id]
   publicly_accessible    = true
@@ -64,25 +65,4 @@ resource "aws_security_group" "rds_sec_group" {
   }
 }
 
-output "rds_hostname" {
-  description = "RDS instance hostname"
-  value       = aws_db_instance.my_bucket_list.address
-  sensitive   = true
-}
 
-output "rds_port" {
-  description = "RDS instance port"
-  value       = aws_db_instance.my_bucket_list.port
-  sensitive   = true
-}
-
-output "rds_username" {
-  description = "RDS instance root username"
-  value       = aws_db_instance.my_bucket_list.username
-  sensitive   = true
-}
-
-output "rds_endpoint" {
-  description = "RDS instance endpoint"
-  value       = aws_db_instance.my_bucket_list.endpoint
-}
