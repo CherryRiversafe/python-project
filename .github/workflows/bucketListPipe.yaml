@@ -4,13 +4,13 @@ on:
   push:
     branches:
       - main
-    paths:
-      - terraform/**
+#    paths:
+#      - terraform/**
   pull_request:
     branches:
       - main
-    paths:
-      - terraform/**
+#    paths:
+#      - terraform/**
 
 env:
   TF_VAR_access_key: ${{ secrets.AWS_ACCESS_KEY }}
