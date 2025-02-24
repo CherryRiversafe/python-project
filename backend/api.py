@@ -9,8 +9,8 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-SECRET_NAME_username = os.getenv('dbUserNameSecret').replace('"','')
-SECRET_NAME_passwd = os.getenv('dbPasswordSecret').replace('"', '')
+SECRET_NAME_username = os.getenv('TF_VAR_DB_USERNAME').replace('"','')
+SECRET_NAME_passwd = os.getenv('rds_passwd').replace('"', '')
 REGION_NAME = 'eu-west-2'
 
 
