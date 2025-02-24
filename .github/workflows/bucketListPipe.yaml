@@ -110,11 +110,8 @@ jobs:
             python-version: "3.13"
           
         - run: pip install -r requirements.txt
-
-        #- run: pytest test_api.py
-        - run: |
-            echo "Debug: AWS_DEFAULT_REGION = $AWS_REGION"
-            pytest test_api.py
+           
+        - run: pytest test_api.py
       
   docker-backend:
     name: Build and Push Docker Image
