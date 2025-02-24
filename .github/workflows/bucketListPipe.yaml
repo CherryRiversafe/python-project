@@ -4,13 +4,9 @@ on:
   push:
     branches:
       - main
-#    paths:
-#      - terraform/**
   pull_request:
     branches:
       - main
-#    paths:
-#      - terraform/**
 
 env:
   TF_VAR_access_key: ${{ secrets.AWS_ACCESS_KEY }}
@@ -55,7 +51,7 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve -var="db_username=${{ env.TF_VAR_DB_USERNAME }}"
    
   #   unit-test-backend:
   #     name: "Prepare python environment"
