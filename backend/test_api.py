@@ -11,10 +11,13 @@ REGION_NAME = 'eu-west-2'
 
 
 def get_secret(secret_name):
+    print("getting secret..")
     session = boto3.session.Session()
     client = session.client(service_name='secretsmanager', region_name=REGION_NAME)
+    print("configured client")
     try:
         response = client.get_secret_value(SecretId=secret_name)
+        print("got secret response")
         if 'SecretString' in response:
             return response['SecretString']
     except Exception as e:
@@ -25,6 +28,8 @@ secret_username = get_secret(SECRET_NAME_username)
 secret_password = get_secret(SECRET_NAME_passwd)
 
 rds_endpoint = os.getenv('TF_RDS_ENDPOINT').replace('"','')
+
+print(f'RDS Endpoint: {rds_endpoint}')
 
 
 db_uri = f'postgresql://{secret_username}:{secret_password}@{rds_endpoint}/bucketListDB'
