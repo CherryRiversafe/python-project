@@ -17,7 +17,7 @@ env:
   DOCKER_TOKEN: ${{secrets.DOCKER_ACCESS_TOKEN_KEY}}
   dbUserNameSecret: ${{ secrets.TF_DB_PASSWORD }}
   dbEndpoint: ${{ secrets.TF_rds_endpoint }}
-  gitRepo_token: ${{secrets.GITREPO_TOKEN}}
+  gitRepo_token: ${{secrets.GIT_TOKEN}}
 
 permissions:
   contents: read
@@ -76,7 +76,7 @@ jobs:
 
       - name: Authenticate with GitHub CLI
         env: 
-          gitRepo_token: ${{secrets.GITREPO_TOKEN}}
+          gitRepo_token: ${{secrets.GIT_TOKEN}}
         run: echo "$gitRepo_token" | gh auth login --with-token
 
       - name: Set secret from Terraform db passwd
