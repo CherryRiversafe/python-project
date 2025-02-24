@@ -99,8 +99,9 @@ jobs:
       run:
         working-directory: ./backend
     env:
-      rds_password: ${{ secrets.TF_DB_PASSWORD }}
-      db_endpoint: ${{ secrets.TF_rds_endpoint }}
+      TF_DB_PASSWORD: ${{ secrets.TF_DB_PASSWORD }}
+      TF_RDS_ENDPOINT: ${{ secrets.TF_rds_endpoint }}
+      TF_VAR_DB_USERNAME: ${{ secrets.AWS_RDS_DB_USERNAME }}
       AWS_REGION: eu-west-2
     
     steps:
