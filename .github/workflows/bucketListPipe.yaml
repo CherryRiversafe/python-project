@@ -114,7 +114,7 @@ jobs:
         #- run: pytest test_api.py
         - run: |
             echo "Debug: AWS_DEFAULT_REGION = $AWS_REGION"
-            pytest test_api.py -v
+            pytest test_api.py
       
   docker-backend:
     name: Build and Push Docker Image
