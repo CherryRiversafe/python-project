@@ -5,8 +5,8 @@ import os
 from api import app, db, BucketListTable
 
 
-SECRET_NAME_username = os.getenv('dbUserNameSecret')
-SECRET_NAME_passwd = os.getenv('dbPasswordSecret').replace('"', '')
+SECRET_NAME_username = os.getenv('TF_VAR_DB_USERNAME').replace('"','')
+SECRET_NAME_passwd = os.getenv('TF_DB_PASSWORD').replace('"', '')
 REGION_NAME = 'eu-west-2'
 
 
@@ -24,7 +24,7 @@ def get_secret(secret_name):
 secret_username = get_secret(SECRET_NAME_username)
 secret_password = get_secret(SECRET_NAME_passwd)
 
-rds_endpoint = os.getenv('dbEndpoint').replace('"','')
+rds_endpoint = os.getenv('TF_RDS_ENDPOINT').replace('"','')
 
 
 db_uri = f'postgresql://{secret_username}:{secret_password}@{rds_endpoint}/bucketListDB'

@@ -11,11 +11,10 @@ CORS(app)
 
 SECRET_NAME_username = os.getenv('TF_VAR_DB_USERNAME').replace('"','')
 SECRET_NAME_passwd = os.getenv('TF_DB_PASSWORD').replace('"', '')
-boto3.setup_default_session(region_name='eu-west-2')
 
 def get_secret(secret_name):
     session = boto3.session.Session()
-    client = session.client(service_name='secretsmanager')
+    client = session.client(service_name='secretsmanager', region_name='eu-west-2')
     try:
         response = client.get_secret_value(SecretId=secret_name)
         if 'SecretString' in response:
