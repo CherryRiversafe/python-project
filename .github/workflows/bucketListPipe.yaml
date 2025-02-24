@@ -15,8 +15,8 @@ env:
   TF_VAR_DB_USERNAME: ${{ secrets.AWS_RDS_DB_USERNAME }}
   DOCKER_NAME: ${{secrets.DOCKER_ACCESS_TOKEN_NAME}}
   DOCKER_TOKEN: ${{secrets.DOCKER_ACCESS_TOKEN_KEY}}
-  dbUserNameSecret: ${{ secrets.TF_DB_PASSWORD }}
-  dbEndpoint: ${{ secrets.TF_rds_endpoint }}
+  TF_DB_PASSWORD: ${{ secrets.TF_DB_PASSWORD }}
+  TF_RDS_ENDPOINT: ${{ secrets.TF_RDS_ENDPOINT }}
   gitRepo_token: ${{secrets.GIT_TOKEN}}
 
 permissions:

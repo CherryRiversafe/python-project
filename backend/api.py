@@ -10,7 +10,7 @@ app = Flask(__name__)
 CORS(app)
 
 SECRET_NAME_username = os.getenv('TF_VAR_DB_USERNAME').replace('"','')
-SECRET_NAME_passwd = os.getenv('rds_passwd').replace('"', '')
+SECRET_NAME_passwd = os.getenv('TF_DB_PASSWORD').replace('"', '')
 REGION_NAME = 'eu-west-2'
 
 
@@ -28,7 +28,7 @@ def get_secret(secret_name):
 secret_username = get_secret(SECRET_NAME_username)
 secret_password = get_secret(SECRET_NAME_passwd)
 
-rds_endpoint = os.getenv('dbEndpoint').replace('"','')
+rds_endpoint = os.getenv('TF_RDS_ENDPOINT').replace('"','')
 
 db_name = 'bucketListDB'
 full_db_url = f'postgresql://{secret_username}:{secret_password}@{rds_endpoint}/{db_name}'
