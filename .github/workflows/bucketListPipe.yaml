@@ -17,6 +17,7 @@ env:
   DOCKER_TOKEN: ${{secrets.DOCKER_ACCESS_TOKEN_KEY}}
   dbUserNameSecret: ${{ secrets.TF_DB_PASSWORD }}
   dbEndpoint: ${{ secrets.TF_rds_endpoint }}
+  gitRepo_token: ${{secrets.GITREPO_TOKEN}}
 
 permissions:
   contents: read
