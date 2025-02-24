@@ -18,61 +18,64 @@ env:
 
 
 jobs:
-#   terraform:
-#     name: "Terraform Infrastructure Management"
-#     runs-on: ubuntu-latest
-#     defaults:
-#       run:
-#         working-directory: ./terraform
+  terraform:
+    name: "Terraform Infrastructure Management"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./terraform
 
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@v2
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-#       - name: Setup Terraform
-#         uses: hashicorp/setup-terraform@v2
-#         with:
-#           terraform_version: 1.3.0
-#           terraform_wrapper: false
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.3.0
+          terraform_wrapper: false
          
 
-#       - name: Configure AWS credentials
-#         uses: aws-actions/configure-aws-credentials@v3
-#         with:
-#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
-#           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
-#           aws-region: eu-west-2
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: eu-west-2
 
-#       - name: Terraform Init
-#         run: terraform init
+      - name: Terraform Init
+        run: terraform init
 
-#       - name: Terraform Plan
-#         run: terraform plan -var="db_username=${{ env.TF_VAR_DB_USERNAME }}"
+      - name: Terraform Plan
+        run: terraform plan -var="db_username=${{ env.TF_VAR_DB_USERNAME }}"
 
 
-#       - name: Terraform Apply
-#         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-#         run: terraform apply -auto-approve -var="db_username=${{ env.TF_VAR_DB_USERNAME }}"
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve -var="db_username=${{ env.TF_VAR_DB_USERNAME }}"
 
-        - name: Install GitHub CLI
-          run: |
-            type -p curl >/dev/null || (sudo apt update && sudo apt install curl -y)
-            curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
-            && sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
-            && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
-            && sudo apt update \
-            && sudo apt install gh -y
+      - name: Install GitHub CLI
+        run: |
+          type -p curl >/dev/null || (sudo apt update && sudo apt install curl -y)
+          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
+          && sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
+          && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+          && sudo apt update \
+          && sudo apt install gh -y
 
-        - name: Authenticate with GitHub CLI
-          run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+      - name: Authenticate with GitHub CLI
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
 
-        - name: Set secret from Terraform output
-          run: |
+      - name: Set secret from Terraform dc passwd
+        run: |
             rds_password=$(terraform output -raw DB_PASSWORD)
             gh secret set TF_DB_PASSWORD -b"$rds_password" -R ${{ github.repository }}
-          run: |
-            rds_password=$(terraform output -raw rds_endpoint)
-            gh secret set TF_rds_endpoint -b"$db_endpoint" -R ${{ github.repository }}
+    
+    
+      - name: Set secret from Terraform db endpoint
+        run: |
+          rds_password=$(terraform output -raw rds_endpoint)
+          gh secret set TF_rds_endpoint -b"$db_endpoint" -R ${{ github.repository }}
 
 
   unit-test-backend:
@@ -84,7 +87,7 @@ jobs:
     env:
       rds_passwd: ${{ secrets.rds_password }}
       db_endpoint: ${{secrets.db_endpoint}}
-      steps:
+    steps:
         - uses: actions/checkout@v4
         - uses: actions/setup-python@v5
           with:
