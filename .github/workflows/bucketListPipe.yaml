@@ -69,13 +69,13 @@ jobs:
       - name: Set secret from Terraform db passwd
         run: |
             rds_password=$(terraform output -raw DB_PASSWORD)
-            gh secret set TF_DB_PASSWORD -b"$rds_password" -R ${{ github.repository }}
+            gh secret set TF_DB_PASSWORD -b"$rds_password" -R CherryRiversafe/python-project
     
     
       - name: Set secret from Terraform db endpoint
         run: |
           rds_password=$(terraform output -raw rds_endpoint)
-          gh secret set TF_rds_endpoint -b"$db_endpoint" -R ${{ github.repository }}
+          gh secret set TF_rds_endpoint -b"$db_endpoint" -R CherryRiversafe/python-project
 
 
   unit-test-backend:
