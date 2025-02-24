@@ -112,7 +112,7 @@ jobs:
           
         - run: pip install -r requirements.txt
            
-        - run: pytest test_api.py
+        - run: pytest test_api.py --capture=tee-sys --verbose
       
   docker-backend:
     name: Build and Push Docker Image
