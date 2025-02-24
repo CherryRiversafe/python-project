@@ -18,6 +18,7 @@ env:
   TF_DB_PASSWORD: ${{ secrets.TF_DB_PASSWORD }}
   TF_RDS_ENDPOINT: ${{ secrets.TF_RDS_ENDPOINT }}
   gitRepo_token: ${{secrets.GIT_TOKEN}}
+  AWS_REGION: eu-west-2
 
 permissions:
   contents: read
@@ -100,6 +101,7 @@ jobs:
     env:
       rds_password: ${{ secrets.TF_DB_PASSWORD }}
       db_endpoint: ${{ secrets.TF_rds_endpoint }}
+      AWS_REGION: eu-west-2
     
     steps:
         - uses: actions/checkout@v4

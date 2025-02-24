@@ -11,8 +11,7 @@ CORS(app)
 
 SECRET_NAME_username = os.getenv('TF_VAR_DB_USERNAME').replace('"','')
 SECRET_NAME_passwd = os.getenv('TF_DB_PASSWORD').replace('"', '')
-REGION_NAME = 'eu-west-2'
-
+boto3.setup_default_session(region_name='eu-west-2')
 
 def get_secret(secret_name):
     session = boto3.session.Session()
