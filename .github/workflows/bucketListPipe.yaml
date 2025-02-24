@@ -75,7 +75,9 @@ jobs:
           && sudo apt install gh -y
 
       - name: Authenticate with GitHub CLI
-        run: echo "${{ secrets.GITREPO_TOKEN }}" | gh auth login --with-token
+        env: 
+          gitRepo_token: ${{secrets.GITREPO_TOKEN}}
+        run: echo "$gitRepo_token" | gh auth login --with-token
 
       - name: Set secret from Terraform db passwd
         run: |
