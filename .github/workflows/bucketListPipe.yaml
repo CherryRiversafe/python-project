@@ -204,6 +204,7 @@ jobs:
         run: |
           npm install
           npm install amazon-cognito-identity-js
+          npm install axios
 
       
 
