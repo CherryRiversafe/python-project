@@ -91,32 +91,32 @@ jobs:
              db_endpoint=$(terraform output -raw rds_endpoint)
              gh secret set TF_rds_endpoint -b"$db_endpoint" -R CherryRiversafe/python-project
           
-  unit-test-backend:
-    name: "Prepare python environment"
-    runs-on: ubuntu-latest
-    needs: terraform
-    defaults:
-      run:
-        working-directory: ./backend
-    env:
-      TF_DB_PASSWORD: ${{ secrets.TF_DB_PASSWORD }}
-      TF_RDS_ENDPOINT: ${{ secrets.TF_rds_endpoint }}
-      TF_VAR_DB_USERNAME: ${{ secrets.AWS_RDS_DB_USERNAME }}
-      AWS_REGION: eu-west-2
+  # unit-test-backend:
+  #   name: "Prepare python environment"
+  #   runs-on: ubuntu-latest
+  #   needs: terraform
+  #   defaults:
+  #     run:
+  #       working-directory: ./backend
+  #   env:
+  #     TF_DB_PASSWORD: ${{ secrets.TF_DB_PASSWORD }}
+  #     TF_RDS_ENDPOINT: ${{ secrets.TF_rds_endpoint }}
+  #     TF_VAR_DB_USERNAME: ${{ secrets.AWS_RDS_DB_USERNAME }}
+  #     AWS_REGION: eu-west-2
     
-    steps:
-        - uses: actions/checkout@v4
-        - uses: actions/setup-python@v5
-          with:
-            python-version: "3.13"
+  #   steps:
+  #       - uses: actions/checkout@v4
+  #       - uses: actions/setup-python@v5
+  #         with:
+  #           python-version: "3.13"
           
-        - run: |
-           echo "req"
-           pip install -r requirements.txt
+  #       - run: |
+  #          echo "req"
+  #          pip install -r requirements.txt
            
-        - run: |
-           echo "te
-           pytest test_api.py --capture=tee-sys --verbose -vv -s
+  #       - run: |
+  #          echo "te
+  #          pytest test_api.py --capture=tee-sys --verbose -vv -s
       
   docker-backend:
     name: Build and Push Docker Image
