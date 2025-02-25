@@ -205,6 +205,7 @@ jobs:
           npm install
           npm install amazon-cognito-identity-js
           npm install axios
+          npm install react-native-web 
 
       
 

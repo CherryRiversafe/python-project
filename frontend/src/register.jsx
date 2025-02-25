@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {CognitoUserAttribute} from 'amazon-cognito-identity-js';
-import { CognitoUser } from "amazon-cognito-identity-js/enhance-rn.js";
+import {CognitoUserAttribute, CognitoUser} from 'amazon-cognito-identity-js';
+//import { CognitoUser } from "amazon-cognito-identity-js/enhance-rn.js";
 import userPool from './userpool.js';
 import { useNavigate } from 'react-router-dom';
 

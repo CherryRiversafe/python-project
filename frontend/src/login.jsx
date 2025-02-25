@@ -1,9 +1,9 @@
 import homeImage from './assets/home.jpg';
 import React, {useState} from 'react';
 import {
-    AuthenticationDetails
+    AuthenticationDetails, CognitoUser
 } from 'amazon-cognito-identity-js';
-import { CognitoUser } from "amazon-cognito-identity-js/enhance-rn.js"
+//import { CognitoUser } from "amazon-cognito-identity-js/enhance-rn.js"
 
 import userPool from './userpool.js';
 import { useNavigate } from 'react-router-dom';
