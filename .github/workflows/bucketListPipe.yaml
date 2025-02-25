@@ -185,6 +185,10 @@ jobs:
 
   deploy-frontend-s3:
     runs-on: ubuntu-latest
+    defaults:
+       run:
+         working-directory: ./frontend
+    needs: terraform
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
