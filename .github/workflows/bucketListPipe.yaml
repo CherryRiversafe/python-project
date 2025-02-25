@@ -182,19 +182,21 @@ jobs:
           - name: Deploy to EKS
             run: |
               kubectl apply -f bucketList_k8s.yaml
-
+    
+    
+    
   deploy-frontend-s3:
     runs-on: ubuntu-latest
     defaults:
-       run:
-         working-directory: ./frontend
+      run:
+        working-directory: ./frontend
     needs: terraform
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
 
@@ -216,6 +218,40 @@ jobs:
 
       - name: Deploy to S3
         run: aws s3 sync ./dist/ s3://${{ secrets.AWS_S3_BUCKET_NAME }} --delete --region eu-west-2
+
+  # deploy-frontend-s3:
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #      run:
+  #        working-directory: ./frontend
+  #   needs: terraform
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
+
+  #     - name: Set up Node.js
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 18
+
+  #     - name: Install dependencies
+  #       run: npm install
+
+  #     - name: Build application
+  #       run: npm run build
+  #       env:
+  #         VITE_APP_BASE_URL: ${{ secrets.bucket_list_url }}
+  #         VITE_APP_ENVIRONMENT: production
+
+  #     - name: Configure AWS credentials
+  #       uses: aws-actions/configure-aws-credentials@v4.0.2
+  #       with:
+  #         aws-region: eu-west-2
+  #         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+  #         aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+
+  #     - name: Deploy to S3
+  #       run: aws s3 sync ./dist/ s3://${{ secrets.AWS_S3_BUCKET_NAME }} --delete --region eu-west-2
   
        
 
