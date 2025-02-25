@@ -30,3 +30,13 @@ output "rds_endpoint" {
   description = "RDS instance endpoint"
   value       = aws_db_instance.my_bucket_list.endpoint
 }
+
+output "s3_frontend_url" {
+  description = "frontend s3 url"
+  value       = "s3://${aws_s3_bucket_object.object.bucket}/${aws_s3_bucket_object.object.key}"
+}
+
+output "s3_frontend_bucketname" {
+  description = "frontend s3 bucket name"
+  value       = aws_s3_bucket.bucketlist-bucket.bucket
+}

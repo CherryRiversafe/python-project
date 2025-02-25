@@ -6,7 +6,7 @@ resource "random_password" "rds_password" {
 }
 
 resource "aws_secretsmanager_secret" "rds_password_secret" {
-  name = "rds-password-secret"
+  name = "rds-db-password-secret"
 }
 
 resource "aws_secretsmanager_secret_version" "rds_password_secret_version" {
@@ -16,7 +16,7 @@ resource "aws_secretsmanager_secret_version" "rds_password_secret_version" {
 
 
 resource "aws_secretsmanager_secret" "db_user" {
-  name                    = "db_user"
+  name                    = "rds_db_user"
   description             = "Service Account Username for the API"
   recovery_window_in_days = 0
   tags = {

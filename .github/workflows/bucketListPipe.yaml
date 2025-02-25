@@ -92,6 +92,10 @@ jobs:
         run: |
              db_endpoint=$(terraform output -raw rds_endpoint)
              gh secret set TF_rds_endpoint -b"$db_endpoint" -R CherryRiversafe/python-project
+             s3_frontend_url=$(terraform output -raw s3_frontend_url)
+             gh secret set TF_s3_frontend_url -b"$s3_frontend_url" -R CherryRiversafe/python-project
+             s3_frontend_bucketname=$(terraform output -raw s3_frontend_bucketname)
+             gh secret set TF_s3_frontend_bucketname -b"$s3_frontend_bucketname" -R CherryRiversafe/python-project
           
   # unit-test-backend:
   #   name: "Prepare python environment"
@@ -208,15 +212,11 @@ jobs:
 
           npm install amazon-cognito-identity-js
           npm install axios
-          
-
-
-      
 
       - name: Build application
         run: npm run build
         env:
-          VITE_APP_BASE_URL: ${{ secrets.bucket_list_url }}
+          VITE_APP_BASE_URL: ${{secrets.TF_s3_frontend_url}}
           VITE_APP_ENVIRONMENT: production
 
       - name: Configure AWS credentials
@@ -227,7 +227,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
 
       - name: Deploy to S3
-        run: aws s3 sync ./dist/ s3://${{ secrets.AWS_S3_BUCKET_NAME }} --delete --region eu-west-2
+        run: aws s3 sync ./dist/ s3://${{ secrets.TF_s3_frontend_bucketname}}  --region eu-west-2
 
   # deploy-frontend-s3:
   #   runs-on: ubuntu-latest
