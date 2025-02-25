@@ -121,7 +121,7 @@ jobs:
   docker-backend:
     name: Build and Push Docker Image
     runs-on: ubuntu-latest
-    needs: unit-test-backend
+    needs: terraform
     defaults:
       run:
         working-directory: ./backend
