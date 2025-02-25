@@ -110,9 +110,13 @@ jobs:
           with:
             python-version: "3.13"
           
-        - run: pip install -r requirements.txt
+        - run: |
+           echo "req"
+           pip install -r requirements.txt
            
-        - run: pytest test_api.py --capture=tee-sys --verbose -vv -s
+        - run: |
+           echo "te
+           pytest test_api.py --capture=tee-sys --verbose -vv -s
       
   docker-backend:
     name: Build and Push Docker Image
