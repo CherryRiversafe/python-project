@@ -206,7 +206,6 @@ jobs:
 
           npm install amazon-cognito-identity-js
           npm install axios
-          npm install react-native-web 
           npm install react@18.2.0 react-dom@18.2.0
 
 
