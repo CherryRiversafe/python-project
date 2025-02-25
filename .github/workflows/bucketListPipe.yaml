@@ -201,7 +201,11 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install
+          npm install amazon-cognito-identity-js
+
+      
 
       - name: Build application
         run: npm run build
