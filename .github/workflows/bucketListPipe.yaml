@@ -227,7 +227,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
 
       - name: Deploy to S3
-        run: aws s3 sync ./dist/ s3://${{ secrets.TF_s3_frontend_bucketname}}  --region eu-west-2
+        run: aws s3 sync ./dist/ s3://bucketlist-frontend-2025 --region eu-west-2
 
   # deploy-frontend-s3:
   #   runs-on: ubuntu-latest
