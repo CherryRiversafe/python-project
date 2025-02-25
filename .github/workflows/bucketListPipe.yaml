@@ -137,7 +137,7 @@ jobs:
         with:
           username: ${{secrets.DOCKER_ACCESS_TOKEN_NAME}}
           password: ${{ secrets.DOCKER_ACCESS_TOKEN_KEY }}
-          registry: docker.io 
+         
 
       - name: Verify Docker Login
         run: docker info # This will show if you are logged in
