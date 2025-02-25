@@ -124,7 +124,7 @@ jobs:
     needs: terraform
     defaults:
       run:
-        working-directory: ./backend
+        working-directory: ./backend/docker
     steps:
         - uses: actions/checkout@v4
         
@@ -140,7 +140,7 @@ jobs:
         - name: Build and push
           uses: docker/build-push-action@v5
           with:
-            context: ./Dockerfile
+            context: .
             push: true
             tags: cherryriversafe/bucketlist-backend:latest
 
