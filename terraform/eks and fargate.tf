@@ -75,11 +75,11 @@ resource "aws_iam_role_policy_attachment" "fargate_pod_execution_role_policy" {
 }
 
 # CoreDNS Addon
-resource "aws_eks_addon" "coredns" {
-  cluster_name      = aws_eks_cluster.bucketList_backend_cluster.name
-  addon_name        = "coredns"
-  addon_version     = "v1.8.7-eksbuild.3"
-  resolve_conflicts = "OVERWRITE"
+# resource "aws_eks_addon" "coredns" {
+#  cluster_name      = aws_eks_cluster.bucketList_backend_cluster.name
+#  addon_name        = "coredns"
+#  addon_version     = "v1.8.7-eksbuild.3"
+#  resolve_conflicts = "OVERWRITE"
 
-  depends_on = [aws_eks_fargate_profile.this]
-}
+# depends_on = [aws_eks_fargate_profile.this]
+#}
