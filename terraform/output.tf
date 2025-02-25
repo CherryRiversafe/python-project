@@ -33,7 +33,7 @@ output "rds_endpoint" {
 
 output "s3_frontend_url" {
   description = "frontend s3 url"
-  value       = "s3://${aws_s3_bucket_object.object.bucket}/${aws_s3_bucket_object.object.key}"
+  value       = "s3://${aws_s3_bucket.bucketlist-bucket.id}/"
 }
 
 output "s3_frontend_bucketname" {
