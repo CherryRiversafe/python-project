@@ -82,4 +82,4 @@ resource "aws_iam_role_policy_attachment" "fargate_pod_execution_role_policy" {
 #  resolve_conflicts = "OVERWRITE"
 
 # depends_on = [aws_eks_fargate_profile.this]
-#}
+# }
