@@ -184,7 +184,10 @@ jobs:
           version: 'v1.24.0'
 
       - name: Update kubeconfig
-        run: aws eks get-token --cluster-name bucketListBackend --region eu-west-2 | kubectl apply -f -
+        run: |
+          aws eks get-token --cluster-name bucketListBackend --region eu-west-2  
+          aws sts get-caller-identity
+          kubectl apply -f -
         
 
       - name: Deploy to EKS
