@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bucketList-backend-deployment
+  name: bucket-backend-deployment
   labels:
     app: bucketList
 spec:
