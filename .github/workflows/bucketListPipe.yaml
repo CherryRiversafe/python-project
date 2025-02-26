@@ -181,7 +181,7 @@ jobs:
               aws-region: eu-west-2
 
           - name: Install and configure kubectl
-            uses: aws-actions/amazon-eks-kubectl-action@v2
+            uses: kodermax/kubectl-aws-eks@main
             with:
               cluster-name: bucketListBackend
 
