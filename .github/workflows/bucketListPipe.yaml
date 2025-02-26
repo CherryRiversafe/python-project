@@ -185,14 +185,14 @@ jobs:
 
       - name: Update kubeconfig
         run: |
-          aws eks get-token --cluster-name bucketListBackend --region eu-west-2  
+          aws eks update-kubeconfig --name bucketListBackend --region eu-west-2 
           aws sts get-caller-identity
-          kubectl apply -f -
+          kubectl apply -f bucketlist_k8s.yaml
         
 
-      - name: Deploy to EKS
-        run: 
-          kubectl apply -f bucketlist_k8s.yaml
+      # - name: Deploy to EKS
+      #   run: 
+      #     kubectl apply -f bucketlist_k8s.yaml
 
 
        
