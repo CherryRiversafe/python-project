@@ -10,12 +10,6 @@ resource "aws_lb" "bucketlist_alb" {
     Environment = "dev"
   }
 
-  access_logs {
-    bucket  = aws_s3_bucket.lb_logs.bucket
-    prefix  = "alb-logs"
-    enabled = true
-  }
-
 }
 
 resource "aws_lb_listener" "bucketlist_alb_listener" {
