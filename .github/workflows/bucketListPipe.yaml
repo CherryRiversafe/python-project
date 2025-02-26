@@ -159,11 +159,6 @@ jobs:
       - name: Display Docker Images (Troubleshooting)
         run: docker images
 
-
-
-
-   
-   
        
   deploy-EKS:
     name: deploy docker image from registry to EKS

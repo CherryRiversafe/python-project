@@ -2,7 +2,7 @@
 resource "aws_eks_cluster" "bucketList_backend_cluster" {
   name     = "my-fargate-cluster"
   role_arn = aws_iam_role.eks_bucketlist_cluster_role.arn
-  version  = "1.24"
+  version  = "1.26"
 
   vpc_config {
     subnet_ids = concat(aws_subnet.private[*].id, aws_subnet.public[*].id)
