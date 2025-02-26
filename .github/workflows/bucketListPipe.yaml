@@ -185,7 +185,7 @@ jobs:
 
       - name: Update kubeconfig
         run: |
-          aws eks update-kubeconfig --name bucketListBackend --region eu-west-2 
+          aws eks update-kubeconfig --name my-fargate-cluster --region eu-west-2 
           aws sts get-caller-identity
           kubectl apply -f bucketlist_k8s.yaml
         
