@@ -15,7 +15,7 @@ spec:
         app: bucketList
     spec:
       containers:
-      - name: bucketList-container
+      - name: bucketlist-container
         image: cherryriversafe/bucketlist-backend:latest
         ports:
         - containerPort: 80
