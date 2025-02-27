@@ -16,7 +16,7 @@ const Home = ({userId}) => {
         const get_list = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`${import.meta.env.TF_LB_DNS}/get_list/${userId}`);
+                const response = await axios.get(`${import.meta.VITE_APP_BASE_URL}/get_list/${userId}`);
                 let data = response.data;
                 if (data.length >= 1) {
                     setBucketList(data.map(item => ({ text: item.item, checked: item.checked })));}
