@@ -220,7 +220,7 @@ jobs:
 
       - name: Update front-end config
         run: |
-            sed -i 's/LB_DNS/${{ secrets.TF_LB_DNS }}/g' src/config.js
+            sed -i 's/LB_DNS/${{ secrets.TF_LB_DNS }}/g' src/home.jsx
       
       - name: Commit and push changes
         run: |
