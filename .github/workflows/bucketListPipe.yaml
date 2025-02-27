@@ -259,6 +259,69 @@ jobs:
 
 
   
+  # deploy-frontend-s3:
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: ./frontend
+  #   needs: terraform
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
+
+  #     - name: Set up Node.js
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 20
+
+  #     - name: Install dependencies
+  #       run: |
+  #         npm install --legacy-peer-deps --force
+  #         npm install amazon-cognito-identity-js axios
+
+  #     - name: Update front-end config
+  #       run: |
+  #         sed -i 's/LB_DNS/${{ secrets.TF_LB_DNS }}/g' src/home.jsx
+  #         if [ $? -ne 0 ]; then
+  #           echo "Error: Failed to update src/home.jsx"
+  #           exit 1
+  #         fi
+
+  #     - name: Authenticate with GitHub CLI
+  #       env: 
+  #         GITHUB_TOKEN: ${{secrets.GIT_TOKEN}}
+  #       run: gh auth setup-git
+
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
+  #       with:
+  #         token: ${{ secrets.git_pat }}
+  #         fetch-depth: 0
+      
+  #     - name: Commit and push changes
+  #       run: |
+  #         git config --global user.email "github-actions[bot]@users.noreply.github.com"
+  #         git config --global user.name "github-actions[bot]"
+  #         git add src/home.jsx
+  #         git commit -m "Update config with Terraform output" || echo "No changes to commit"
+  #         git push https://${{ secrets.git_pat }}@github.com/CherryRiversafe/python-project.git HEAD:main
+           
+  #     - name: Build application
+  #       run: npm run build
+  #       env:
+  #         VITE_APP_BASE_URL: ${{secrets.TF_s3_frontend_url}}
+  #         VITE_APP_ENVIRONMENT: production
+
+  #     - name: Configure AWS credentials
+  #       uses: aws-actions/configure-aws-credentials@v4.0.2
+  #       with:
+  #         aws-region: eu-west-2
+  #         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+  #         aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+
+  #     - name: Deploy to S3
+  #       run: aws s3 sync ./dist/ s3://bucketlist-frontend-2025 --region eu-west-2
+
   deploy-frontend-s3:
     runs-on: ubuntu-latest
     defaults:
@@ -268,6 +331,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.git_pat }}
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -278,6 +344,9 @@ jobs:
         run: |
           npm install --legacy-peer-deps --force
           npm install amazon-cognito-identity-js axios
+
+      - name: Install Vite
+        run: npm install -D vite
 
       - name: Update front-end config
         run: |
@@ -292,12 +361,6 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GIT_TOKEN}}
         run: gh auth setup-git
 
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.git_pat }}
-          fetch-depth: 0
-      
       - name: Commit and push changes
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
@@ -305,10 +368,12 @@ jobs:
           git add src/home.jsx
           git commit -m "Update config with Terraform output" || echo "No changes to commit"
           git push https://${{ secrets.git_pat }}@github.com/CherryRiversafe/python-project.git HEAD:main
-      
-      
+
+      - name: Display package.json
+        run: cat package.json
+
       - name: Build application
-        run: npm run build
+        run: npx vite build
         env:
           VITE_APP_BASE_URL: ${{secrets.TF_s3_frontend_url}}
           VITE_APP_ENVIRONMENT: production
@@ -326,5 +391,4 @@ jobs:
 
 
 
-
-                    
+                      
