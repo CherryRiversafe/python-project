@@ -44,6 +44,15 @@ resource "aws_s3_bucket_website_configuration" "bucketlist" {
       replace_key_prefix_with = "login/"
     }
   }
+
+  routing_rule {
+    condition {
+      key_prefix_equals = "login/"
+    }
+    redirect {
+      replace_key_prefix_with = "register/"
+    }
+  }
 }
 
 resource "aws_s3_bucket_policy" "bucketlistpolicy" {
