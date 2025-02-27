@@ -93,9 +93,8 @@ const Login = ({onLogin}) => {
                                     </div>
                                     <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                                             <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account? 
-                                            <a href="/register" className="link-danger">Register</a>
-                                            </p>
-                                        
+                                                <a href="/register" className="link-danger">Register</a>
+                                            </p>   
                                     </div>
                                     
                                 </div>
