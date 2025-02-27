@@ -232,6 +232,8 @@ jobs:
       
       - name: Commit and push changes
         run: |
+            git config --global user.email "cherryzhang@riversafe.co.uk"
+            git config --global user.name "CherryRiversafe"
             git add src/home.jsx
             git commit -m "Update config with Terraform output"
             git push
