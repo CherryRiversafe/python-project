@@ -295,7 +295,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.git_pat }}
           fetch-depth: 0
       
       - name: Commit and push changes
@@ -304,9 +304,8 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git add src/home.jsx
           git commit -m "Update config with Terraform output" || echo "No changes to commit"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          git push https://${{ secrets.git_pat }}@github.com/CherryRiversafe/python-project.git HEAD:main
+      
       
       - name: Build application
         run: npm run build
