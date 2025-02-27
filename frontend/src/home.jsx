@@ -17,7 +17,7 @@ const Home = ({userId}) => {
             setLoading(true);
             try {
 <<<<<<< HEAD
-                const response = await axios.get(`${import.env.VITE_APP_BASE_URL}/get_list/${userId}`);
+                const response = await axios.get(`${import.meta.env.VITE_APP_BASE_URL}/get_list/${userId}`);
 =======
                 const response = await axios.get(`${bucketlist-alb-425435975.eu-west-2.elb.amazonaws.com}/get_list/${userId}`);
 >>>>>>> 299ebd20adb6e97ab0de284d6af37bb02051c492
