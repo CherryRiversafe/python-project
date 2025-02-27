@@ -40,3 +40,8 @@ output "s3_frontend_bucketname" {
   description = "frontend s3 bucket name"
   value       = aws_s3_bucket.bucketlist-bucket.bucket
 }
+
+output "alb_dns_name" {
+  value = aws_lb.bucketlist_alb.dns_name
+}
+

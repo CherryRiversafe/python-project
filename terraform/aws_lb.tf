@@ -74,9 +74,6 @@ resource "aws_lb_target_group" "bucketlist_tg" {
   }
 }
 
-output "alb_dns_name" {
-  value = aws_lb.bucketlist_alb.dns_name
-}
 
 
 # resource "aws_lb_target_group_attachment" "tg_attachment" {

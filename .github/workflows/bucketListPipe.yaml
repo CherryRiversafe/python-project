@@ -86,7 +86,11 @@ jobs:
         run: |
             rds_password=$(terraform output -raw DB_PASSWORD)
             gh secret set TF_DB_PASSWORD -b"$rds_password" -R CherryRiversafe/python-project
-    
+            - name: Capture Terraform output
+            run: echo "MY_VAR=$(terraform output -raw my_output)" >> $GITHUB_ENV
+      
+      - name: Capture Terraform output
+        run: echo "TF_LB_DNS"=$(terraform output -raw alb_dns_name)" >> $GITHUB_ENV
     
       - name: Set secret from Terraform db endpoint
         run: |
@@ -212,6 +216,20 @@ jobs:
 
           npm install amazon-cognito-identity-js
           npm install axios
+
+      - name: Update front-end config
+        run: |
+            sed -i 's/LB_DNS/${{ env.TF_LB_DNS }}/g' src/config.js
+      
+      - name: Commit and push changes
+        run: |
+            git config --global user.name 'GitHub Actions'
+            git config --global user.email 'actions@github.com'
+            git add src/config.js
+            git commit -m "Update config with Terraform output"
+            git push
+             
+        
 
       - name: Build application
         run: npm run build
