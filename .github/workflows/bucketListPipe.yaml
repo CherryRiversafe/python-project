@@ -375,8 +375,8 @@ jobs:
       - name: Build application
         run: npx vite build
         env:
-          #VITE_APP_BASE_URL: ${{secrets.TF_LB_DNS}}
-          VITE_APP_BASE_URL: ${{secrets.TF_s3_frontend_url}}
+          VITE_APP_BASE_URL: ${{secrets.TF_LB_DNS}}
+          #VITE_APP_BASE_URL: ${{secrets.TF_s3_frontend_url}}
           VITE_APP_ENVIRONMENT: production
 
       - name: Configure AWS credentials
