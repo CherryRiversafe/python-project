@@ -16,7 +16,7 @@ const Home = ({userId}) => {
         const get_list = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`${LB_DNS}/get_list/${userId}`);
+                const response = await axios.get(`${import.meta.env.VITE_APP_BASE_URL}/get_list/${userId}`);
                 let data = response.data;
                 if (data.length >= 1) {
                     setBucketList(data.map(item => ({ text: item.item, checked: item.checked })));}
@@ -42,7 +42,7 @@ const Home = ({userId}) => {
         const updatedList = bucketList.filter((_, i) => i !== index);
         setBucketList(updatedList);
         let id = `${userId}${bucketList[index].text}`;
-        axios.delete(`http://localhost:5000/delete_item/${id}`)
+        axios.delete(`${import.meta.env.VITE_APP_BASE_URL}/delete_item/${id}`)
             .catch(error => {
                 console.error('Error deleting item:', error);
                 // Revert the change if the API call fails
@@ -57,7 +57,7 @@ const Home = ({userId}) => {
             setListItem('');
         }
     
-        axios.post(`http://localhost:5000/add_item/${userId}`, {
+        axios.post(`${import.meta.env.VITE_APP_BASE_URL}/add_item/${userId}`, {
             id: userId + listItem,
             item: listItem,
             checked: false,
@@ -73,7 +73,7 @@ const Home = ({userId}) => {
             )
         );
         let id = `${userId}${bucketList[index].text}`;
-        axios.put(`http://localhost:5000/update_item/${id}`,{
+        axios.put(`${import.meta.env.VITE_APP_BASE_URL}/update_item/${id}`,{
             checked: !bucketList[index].checked
          })
     }
