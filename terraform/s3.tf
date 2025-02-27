@@ -41,6 +41,7 @@ resource "aws_s3_bucket_website_configuration" "bucketlist" {
     redirect {
       replace_key_prefix_with = "login/"
     }
+  }
 }
 
 resource "aws_s3_bucket_policy" "bucketlistpolicy" {
