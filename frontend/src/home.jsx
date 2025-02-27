@@ -17,7 +17,7 @@ const Home = ({userId}) => {
             setLoading(true);
             try {
                 //const response = await axios.get(`${import.meta.VITE_APP_BASE_URL}/get_list/${userId}`);
-                const response = await axios.get(`bucketlist-alb-425435975.eu-west-2.elb.amazonaws.com/get_list/${userId}`);
+                const response = await axios.get(`http://bucketlist-alb-425435975.eu-west-2.elb.amazonaws.com/get_list/${userId}`);
                 let data = response.data;
                 if (data.length >= 1) {
                     setBucketList(data.map(item => ({ text: item.item, checked: item.checked })));}
@@ -130,10 +130,12 @@ const Home = ({userId}) => {
                     </div>
                 </div>              
             </section>          
-        )} else {
-            nav('/login')
-            return null
-        }
+        )} useEffect(() => {
+            if (userId === null) {
+              nav('/login');
+            }
+          }, [userId, nav]);
+          
     }
 
 export default Home;
