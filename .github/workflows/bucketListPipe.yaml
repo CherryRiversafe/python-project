@@ -86,8 +86,6 @@ jobs:
         run: |
             rds_password=$(terraform output -raw DB_PASSWORD)
             gh secret set TF_DB_PASSWORD -b"$rds_password" -R CherryRiversafe/python-project
-            - name: Capture Terraform output
-            run: echo "MY_VAR=$(terraform output -raw my_output)" >> $GITHUB_ENV
       
       - name: Capture Terraform output
         run: echo "TF_LB_DNS"=$(terraform output -raw alb_dns_name)" >> $GITHUB_ENV
