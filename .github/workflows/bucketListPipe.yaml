@@ -226,7 +226,7 @@ jobs:
         run: |
             git config --global user.name 'GitHub Actions'
             git config --global user.email 'actions@github.com'
-            git add src/config.js
+            git add src/home.jsx
             git commit -m "Update config with Terraform output"
             git push
              
