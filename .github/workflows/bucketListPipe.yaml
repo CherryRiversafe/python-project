@@ -88,7 +88,10 @@ jobs:
             gh secret set TF_DB_PASSWORD -b"$rds_password" -R CherryRiversafe/python-project
       
       - name: Capture Terraform output
-        run: echo "TF_LB_DNS"=$(terraform output -raw alb_dns_name)" >> $GITHUB_ENV
+        run: |
+          TF_LB_DNS=$(terraform output -raw alb_dns_name)
+          gh secret set TF_LB_DNS -b"$TF_LB_DNS" -R CherryRiversafe/python-project
+
     
       - name: Set secret from Terraform db endpoint
         run: |
@@ -217,7 +220,7 @@ jobs:
 
       - name: Update front-end config
         run: |
-            sed -i 's/LB_DNS/${{ env.TF_LB_DNS }}/g' src/config.js
+            sed -i 's/LB_DNS/${{ secrets.TF_LB_DNS }}/g' src/config.js
       
       - name: Commit and push changes
         run: |
