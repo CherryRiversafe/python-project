@@ -6,6 +6,8 @@ resource "aws_s3_bucket" "bucketlist-bucket" {
   }
 }
 
+
+
 resource "aws_s3_bucket_public_access_block" "bucketlist-bucket" {
   bucket = aws_s3_bucket.bucketlist-bucket.id
 
