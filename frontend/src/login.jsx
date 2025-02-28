@@ -76,10 +76,6 @@ const Login = ({onLogin}) => {
                                     <div className="form-check mb-0">
                                     </div>
                                 </div>
-
-
-
-
       
                                 <div className="text-center text-lg-start mt-4 pt-2 ">
                                     <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
