@@ -33,7 +33,7 @@ resource "aws_s3_bucket_website_configuration" "bucketlist" {
   }
 
   error_document {
-    key = "error.html"
+    key = "index.html"
   }
 
 #  routing_rule {
