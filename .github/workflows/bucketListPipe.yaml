@@ -193,6 +193,7 @@ jobs:
           aws eks update-kubeconfig --name my-fargate-cluster --region eu-west-2 
           aws sts get-caller-identity
           kubectl apply -k "github.com/aws/eks-charts/stable/aws-load-balancer-controller//crds?ref=master"
+          kubectl get crd | grep elbv2.k8s.aws
           kubectl apply -f bucketlist_k8s.yaml 
           kubectl apply -f service.yaml 
           kubectl apply -f ingress.yaml
