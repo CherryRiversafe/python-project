@@ -67,10 +67,9 @@ resource "aws_lb_target_group" "bucketlist_tg" {
   health_check {
     healthy_threshold   = 2
     unhealthy_threshold = 10
-    timeout             = 5
-    interval            = 30
-    path                = "/health"
-    port                = "traffic-port"
+    timeout             = 10
+    interval            = 60
+    path                = "/"
   }
 }
 
