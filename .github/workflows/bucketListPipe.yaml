@@ -192,7 +192,9 @@ jobs:
         run: |
           aws eks update-kubeconfig --name my-fargate-cluster --region eu-west-2 
           aws sts get-caller-identity
-          kubectl apply -f bucketlist_k8s.yaml
+          kubectl apply -f bucketlist_k8s.yaml 
+          kubectl -f service.yaml 
+          kubectl -f ingress.yaml
     
 
   deploy-frontend-s3:
