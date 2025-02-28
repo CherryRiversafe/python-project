@@ -195,6 +195,8 @@ jobs:
           kubectl apply -f bucketlist_k8s.yaml 
           kubectl apply -f service.yaml 
           kubectl apply -f ingress.yaml
+          kubectl apply -f ingressclass.yaml
+          kubectl apply -f ingressclassparams.yaml
     
 
   deploy-frontend-s3:
