@@ -130,11 +130,11 @@ const Home = ({userId}) => {
                     </div>
                 </div>              
             </section>          
-        )} useEffect(() => {
-            if (userId === null) {
+        )} else{useEffect(() => {
+            
               nav('/login');
-            }
-          }, [userId, nav]);
+            
+          }, [userId, nav]);}
           
     }
 
