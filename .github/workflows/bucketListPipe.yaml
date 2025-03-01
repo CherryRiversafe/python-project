@@ -195,7 +195,8 @@ jobs:
           kubectl apply -k "github.com/aws/eks-charts/stable/aws-load-balancer-controller//crds?ref=master"
           kubectl get crd | grep elbv2.k8s.aws
           kubectl apply -f bucketlist_k8s.yaml
-          kubectl apply -f configmap.yaml 
+          kubectl apply -f configmap.yaml
+          kubectl describe configmap -n kube-system aws-auth
           kubectl apply -f service.yaml 
           kubectl apply -f ingress.yaml
           kubectl apply -f ingressclass.yaml
