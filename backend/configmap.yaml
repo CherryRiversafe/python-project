@@ -5,7 +5,7 @@ metadata:
   namespace: kube-system
 data:
   mapRoles: |
-    - rolearn: arn:aws:sts::466847355032:assumed-role/AWSReservedSSO_RS-DEVOPS_3cddbd8a038b57ac
+    - rolearn: arn:aws:iam::466847355032:role/AWSReservedSSO_RS-DEVOPS_3cddbd8a038b57ac
       username: czhang
       groups:
         - system:masters
