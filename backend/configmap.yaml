@@ -5,7 +5,7 @@ metadata:
   namespace: kube-system
 data:
   mapRoles: |
-    - rolearn: arn:aws:sts::466847355032:assumed-role/RS-DEVOPS/czhang
+    - rolearn: arn:aws:iam::466847355032:role/czhang
       username: czhang
       groups:
         - system:masters
