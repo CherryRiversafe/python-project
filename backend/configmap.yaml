@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aws-auth
+  namespace: kube-system
+data:
+  mapRoles: |
+    - rolearn: arn:aws:sts::466847355032:assumed-role/RS-DEVOPS/czhang
+      username: czhang
+      groups:
+        - system:masters
