@@ -6,6 +6,6 @@ metadata:
 data:
   mapRoles: |
     - rolearn: arn:aws:iam::466847355032:role/czhang
-      username: czhang
+      username: cluster-admin
       groups:
         - system:masters
