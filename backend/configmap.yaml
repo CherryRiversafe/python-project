@@ -5,7 +5,8 @@ metadata:
   namespace: kube-system
 data:
   mapRoles: |
-    - rolearn: arn:aws:iam::466847355032:role/czhang
+    - groups:
+      -system:masters
+      rolearn: arn:aws:iam::466847355032:role/czhang
       username: cluster-admin
-      groups:
-        - system:masters
+        
