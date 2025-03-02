@@ -7,6 +7,12 @@ resource "aws_eks_cluster" "bucketList_backend_cluster" {
   vpc_config {
     subnet_ids = concat(aws_subnet.private[*].id, aws_subnet.public[*].id)
 
+  enabled_cluster_log_types = [
+    "api",
+    "controllerManager",
+    "scheduler"
+  ]
+
   }
 
   depends_on = [
