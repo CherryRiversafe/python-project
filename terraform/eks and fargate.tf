@@ -8,12 +8,6 @@ resource "aws_eks_cluster" "bucketList_backend_cluster" {
     subnet_ids = concat(aws_subnet.private[*].id, aws_subnet.public[*].id)
   }
 
-  enabled_cluster_log_types = [
-    "api",
-    "controllerManager",
-    "scheduler"
-  ]
-
   depends_on = [
     aws_iam_role_policy_attachment.eks_bucketlist_cluster_policy,
     aws_iam_role_policy_attachment.eks_vpc_resource_controller,
@@ -73,9 +67,31 @@ resource "aws_iam_role" "fargate_pod_execution_role" {
     }]
   })
 }
+resource "aws_iam_policy" "cloudwatch_access" {
+  name = "eks_node_cloudwatch_access"
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "logs:CreateLogStream",
+          "logs:PutLogEvents",
+          "logs:DescribeLogStreams"
+        ],
+        Resource = "arn:aws:logs:*:*:log-group/aws/containerinsights/*"
+      } 
+    ]
+  })
+}
 
 resource "aws_iam_role_policy_attachment" "fargate_pod_execution_role_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSFargatePodExecutionRolePolicy"
+  role       = aws_iam_role.fargate_pod_execution_role.name
+}
+
+resource "aws_iam_role_policy_attachment" "fargate_pod_execution_cloudwatch_role_policy" {
+  policy_arn = aws_iam_policy.cloudwatch_access.arn
   role       = aws_iam_role.fargate_pod_execution_role.name
 }
 
