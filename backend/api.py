@@ -9,8 +9,8 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-SECRET_NAME_username = os.getenv('TF_VAR_DB_USERNAME').replace('"','')
-SECRET_NAME_passwd = os.getenv('TF_DB_PASSWORD').replace('"', '')
+SECRET_NAME_username = (os.getenv('TF_VAR_DB_USERNAME') or ' ').replace('"','')
+SECRET_NAME_passwd = (os.getenv('TF_DB_PASSWORD') or ' ').replace('"', '')
 
 def get_secret(secret_name):
     session = boto3.session.Session()
@@ -26,7 +26,7 @@ def get_secret(secret_name):
 secret_username = get_secret(SECRET_NAME_username)
 secret_password = get_secret(SECRET_NAME_passwd)
 
-rds_endpoint = os.getenv('TF_RDS_ENDPOINT').replace('"','')
+rds_endpoint = (os.getenv('TF_RDS_ENDPOINT') or '').replace('"','')
 
 db_name = 'bucketListDB'
 full_db_url = f'postgresql://{secret_username}:{secret_password}@{rds_endpoint}/{db_name}'

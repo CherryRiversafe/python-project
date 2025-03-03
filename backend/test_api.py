@@ -1,7 +1,15 @@
 import pytest
 import boto3
-from moto import mock_rds
-from your_api_file import app, db, BucketListTable
+from moto import mock_aws
+from api import app, db
+from unittest.mock import MagicMock
+import ssl
+
+
+
+# Mock SSL wrap_socket if it doesn't exist
+if not hasattr(ssl, 'wrap_socket'):
+    ssl.wrap_socket = MagicMock()
 
 @pytest.fixture(scope='function')
 def aws_credentials():
@@ -13,7 +21,7 @@ def aws_credentials():
 
 @pytest.fixture(scope='function')
 def rds_client(aws_credentials):
-    with mock_rds():
+    with mock_aws():
         yield boto3.client('rds', region_name='us-east-1')
 
 @pytest.fixture(scope='function')
@@ -28,14 +36,19 @@ def mock_rds_instance(rds_client):
     )
     yield
 
+@pytest.fixture
+def client():
+    app.config['TESTING'] = True
+    with app.test_client() as client:
+        with app.app_context():
+            db.create_all()
+        yield client
+    db.drop_all()
+
 def test_rds_instance_created(rds_client, mock_rds_instance):
     instances = rds_client.describe_db_instances()['DBInstances']
     assert len(instances) == 1
     assert instances[0]['DBInstanceIdentifier'] == 'test-db'
-
-
-
-
 
 def test_home(client):
     response = client.get('/')
@@ -87,3 +100,8 @@ def test_delete_item(client):
     response = client.delete('/delete_item/1')
     assert response.status_code == 200
     assert response.json == {"message": "Item deleted."}
+
+
+
+if __name__ == '__main__':
+    pytest.main(['-v', '-s'])

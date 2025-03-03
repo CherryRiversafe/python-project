@@ -160,6 +160,10 @@ jobs:
           file: ./backend/Dockerfile
           push: true
           tags: docker.io/cherryriversafe/bucketlist-backend:latest
+          build-args: |
+            TF_VAR_DB_USERNAME=${{ secrets.AWS_RDS_DB_USERNAME }}
+            TF_DB_PASSWORD=${{ secrets.TF_DB_PASSWORD }}
+            TF_RDS_ENDPOINT=${{ secrets.TF_RDS_ENDPOINT }}
 
       - name: Display Docker Images (Troubleshooting)
         run: docker images
@@ -193,7 +197,6 @@ jobs:
           aws eks update-kubeconfig --name my-fargate-cluster --region eu-west-2 
           aws sts get-caller-identity
           kubectl apply -k "github.com/aws/eks-charts/stable/aws-load-balancer-controller//crds?ref=master"
-          kubectl apply -f https://github.com/aws-samples/amazon-cloudwatch-container-insights/blob/main/k8s-yaml-templates/fluentd/fluentd.yaml
           kubectl get crd | grep elbv2.k8s.aws
           kubectl apply -f bucketlist_k8s.yaml
           kubectl apply -f configmap.yaml
