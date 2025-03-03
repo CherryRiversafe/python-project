@@ -19,3 +19,10 @@ spec:
         image: cherryriversafe/bucketlist-backend:latest
         ports:
         - containerPort: 80
+        env:
+        - name: TF_VAR_DB_USERNAME
+          value: "{{TF_VAR_DB_USERNAME}}"
+        - name: TF_DB_PASSWORD
+          value: "{{TF_DB_PASSWORD}}"
+        - name: TF_RDS_ENDPOINT
+          value: "{{TF_RDS_ENDPOINT}}"

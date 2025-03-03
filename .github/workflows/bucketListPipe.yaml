@@ -192,6 +192,12 @@ jobs:
         with:
           version: 'v1.24.0'
 
+      - name: Place deployment env vars
+        run: |
+          sed -i "s|{{TF_VAR_DB_USERNAME}}|{{ secrets.TF_VAR_DB_USERNAME }}|g" bucketlist_k8s.yaml
+          sed -i "s|{{TF_DB_PASSWORD}}|{{ secrets.TF_DB_PASSWORD }}|g" bucketlist_k8s.yaml
+          sed -i "s|{{TF_RDS_ENDPOINT}}|{{ secrets.TF_RDS_ENDPOINT }}|g" bucketlist_k8s.yaml
+      
       - name: Update kubeconfig
         run: |
           aws eks update-kubeconfig --name my-fargate-cluster --region eu-west-2 
