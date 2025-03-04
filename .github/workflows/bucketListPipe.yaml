@@ -208,9 +208,7 @@ jobs:
           kubectl apply -f configmap.yaml
           kubectl describe configmap -n kube-system aws-auth
           kubectl apply -f service.yaml 
-          kubectl apply -f ingress.yaml
-          kubectl apply -f ingressclass.yaml
-          kubectl apply -f ingressclassparams.yaml
+          
     
 
   deploy-frontend-s3:
