@@ -41,9 +41,9 @@ output "s3_frontend_bucketname" {
   value       = aws_s3_bucket.bucketlist-bucket.bucket
 }
 
-output "alb_dns_name" {
-  value = aws_lb.bucketlist_alb.dns_name
-}
+# output "alb_dns_name" {
+#   value = aws_lb.bucketlist_alb.dns_name
+# }
 
 
 
