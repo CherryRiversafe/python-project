@@ -31,7 +31,7 @@ resource "aws_subnet" "public" {
   tags = {
     Name                     = "eks-public-${count.index + 1}"
     "kubernetes.io/role/elb" = "1"
-    "kuberbetes.io/cluster/${var.cluster_name}" = "owned"
+    "kuberbetes.io/cluster/my-fargate-cluster" = "owned"
   }
 }
 
