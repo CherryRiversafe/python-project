@@ -1,10 +1,14 @@
 # EKS Cluster
 resource "aws_eks_cluster" "bucketList_backend_cluster" {
-  name     = "my-fargate-cluster"
+  name     = var.cluster_name
   role_arn = aws_iam_role.eks_bucketlist_cluster_role.arn
-  version  = "1.26"
+  version  = var.cluster_version
 
   vpc_config {
+    endpoint_private_access = false
+    endpoint_public_access = true
+    public_access_cidr = ["0.0.0.0/0"]
+    
     subnet_ids = concat(aws_subnet.private[*].id, aws_subnet.public[*].id)
   }
 
@@ -18,16 +22,18 @@ resource "aws_eks_cluster" "bucketList_backend_cluster" {
 resource "aws_iam_role" "eks_bucketlist_cluster_role" {
   name = "eks-backetlist-cluster-role"
 
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
+  assume_role_policy = <<POLICY
+    {
+    Version = "2012-10-17",
     Statement = [{
-      Action = "sts:AssumeRole"
-      Effect = "Allow"
+      Action = "sts:AssumeRole",
+      Effect = "Allow",
       Principal = {
         Service = "eks.amazonaws.com"
       }
     }]
-  })
+  }
+POLICY
 }
 
 resource "aws_iam_role_policy_attachment" "eks_bucketlist_cluster_policy" {

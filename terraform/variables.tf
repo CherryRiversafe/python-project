@@ -24,3 +24,12 @@ variable "db_username" {
   description = "db service username"
   type        = string
 }
+
+variable "cluster_name" {
+  type = string
+  default = "my-fargate-cluster"
+}
+
+variable "cluster_version"{
+  default = "1.26"
+}

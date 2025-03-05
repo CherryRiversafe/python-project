@@ -11,24 +11,27 @@ resource "aws_vpc" "eks_vpc" {
 resource "aws_subnet" "private" {
   count             = 2
   vpc_id            = aws_vpc.eks_vpc.id
-  cidr_block        = "10.0.${count.index + 1}.0/24"
+  cidr_block        = "10.0.${count.index + 1}.0/19"
   availability_zone = data.aws_availability_zones.available.names[count.index]
 
   tags = {
     Name                              = "eks-private-${count.index + 1}"
     "kubernetes.io/role/internal-elb" = "1"
+    "kuberbetes.io/cluster/${var.cluster_name}" = "owned"
   }
 }
 
 resource "aws_subnet" "public" {
   count             = 2
   vpc_id            = aws_vpc.eks_vpc.id
-  cidr_block        = "10.0.${count.index + 101}.0/24"
+  cidr_block        = "10.0.${count.index + 101}.0/19"
   availability_zone = data.aws_availability_zones.available.names[count.index]
+  map_public_ip_on_launch = true
 
   tags = {
     Name                     = "eks-public-${count.index + 1}"
     "kubernetes.io/role/elb" = "1"
+    "kuberbetes.io/cluster/${var.cluster_name}" = "owned"
   }
 }
 
@@ -47,6 +50,8 @@ resource "aws_nat_gateway" "eks_nat" {
   tags = {
     Name = "eks-nat"
   }
+
+  depends_on = [ aws_internet_gateway.eks_igw ]
 }
 
 resource "aws_eip" "nat" {
