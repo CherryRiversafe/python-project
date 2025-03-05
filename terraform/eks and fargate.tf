@@ -7,7 +7,7 @@ resource "aws_eks_cluster" "bucketList_backend_cluster" {
   vpc_config {
     endpoint_private_access = false
     endpoint_public_access = true
-    public_access_cidr = ["0.0.0.0/0"]
+    public_access_cidrs = ["0.0.0.0/0"]
 
     subnet_ids = concat(aws_subnet.private[*].id, aws_subnet.public[*].id)
   }
