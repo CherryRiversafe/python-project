@@ -94,4 +94,3 @@ resource "aws_iam_role_policy_attachment" "fargate_pod_execution_cloudwatch_role
   policy_arn = aws_iam_policy.cloudwatch_access.arn
   role       = aws_iam_role.fargate_pod_execution_role.name
 }
-

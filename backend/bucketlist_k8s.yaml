@@ -4,7 +4,6 @@ metadata:
   name: bucket-backend-deployment
   labels:
     app: bucketList
-    namespace: default
 spec:
   replicas: 3
   selector:
