@@ -17,7 +17,7 @@ resource "aws_subnet" "private" {
   tags = {
     Name                              = "eks-private-${count.index + 1}"
     "kubernetes.io/role/internal-elb" = "1"
-    "kuberbetes.io/cluster/${var.cluster_name}" = "owned"
+    "kuberbetes.io/cluster/my-fargate-cluster" = "owned"
   }
 }
 
