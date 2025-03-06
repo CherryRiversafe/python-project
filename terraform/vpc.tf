@@ -62,31 +62,31 @@ resource "aws_eip" "nat" {
   }
 }
 
-resource "aws_route_table" "private" {
-  vpc_id = aws_vpc.eks_vpc.id
+# resource "aws_route_table" "private" {
+#   vpc_id = aws_vpc.eks_vpc.id
 
-  route {
-    cidr_block     = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.eks_nat.id
-  }
+#   route {
+#     cidr_block     = "0.0.0.0/0"
+#     nat_gateway_id = aws_nat_gateway.eks_nat.id
+#   }
 
-  tags = {
-    Name = "eks-private-rt"
-  }
-}
+#   tags = {
+#     Name = "eks-private-rt"
+#   }
+# }
 
-resource "aws_route_table" "public" {
-  vpc_id = aws_vpc.eks_vpc.id
+# resource "aws_route_table" "public" {
+#   vpc_id = aws_vpc.eks_vpc.id
 
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.eks_igw.id
-  }
+#   route {
+#     cidr_block = "0.0.0.0/0"
+#     gateway_id = aws_internet_gateway.eks_igw.id
+#   }
 
-  tags = {
-    Name = "eks-public-rt"
-  }
-}
+#   tags = {
+#     Name = "eks-public-rt"
+#   }
+# }
 
 resource "aws_route_table_association" "private" {
   count          = 2
