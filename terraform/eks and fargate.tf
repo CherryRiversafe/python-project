@@ -4,6 +4,8 @@ resource "aws_eks_cluster" "bucketList_backend_cluster" {
   role_arn = aws_iam_role.eks_bucketlist_cluster_role.arn
   version  = "1.31"
 
+  bootstrap_self_managed_addons = false
+
   vpc_config {
     endpoint_private_access = false
     endpoint_public_access = true
