@@ -2,7 +2,7 @@
 resource "aws_eks_cluster" "bucketList_backend_cluster" {
   name     = "my-fargate-cluster"
   role_arn = aws_iam_role.eks_bucketlist_cluster_role.arn
-  version  = "1.26"
+  version  = "1.31"
 
   vpc_config {
     endpoint_private_access = false
