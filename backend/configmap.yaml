@@ -9,4 +9,8 @@ data:
       username: czhang
       groups:
         - system:masters
-        
+    - rolearn: arn:aws:iam:466847355032:role/bottlerocket-eks-node-group-20240514130810459800000004
+      username: system:node:ip-10-0-102-58.eu-west-2.compute.internal
+      groups:
+        - system:bootstrappers
+        - system:nodes

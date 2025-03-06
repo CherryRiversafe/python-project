@@ -55,6 +55,9 @@ resource "aws_eks_fargate_profile" "bucketList_backend_cluster" {
 
   selector {
     namespace = "default"
+     labels = {
+     app = "bucketList"
+  }
   }
 }
 
