@@ -35,24 +35,24 @@ resource "aws_subnet" "public" {
   }
 }
 
-resource "aws_internet_gateway" "eks_igw" {
-  vpc_id = aws_vpc.eks_vpc.id
+# resource "aws_internet_gateway" "eks_igw" {
+#   vpc_id = aws_vpc.eks_vpc.id
 
-  tags = {
-    Name = "eks-igw"
-  }
-}
+#   tags = {
+#     Name = "eks-igw"
+#   }
+# }
 
-resource "aws_nat_gateway" "eks_nat" {
-  allocation_id = aws_eip.nat.id
-  subnet_id     = aws_subnet.public[0].id
+# resource "aws_nat_gateway" "eks_nat" {
+#   allocation_id = aws_eip.nat.id
+#   subnet_id     = aws_subnet.public[0].id
 
-  tags = {
-    Name = "eks-nat"
-  }
+#   tags = {
+#     Name = "eks-nat"
+#   }
 
-  depends_on = [ aws_internet_gateway.eks_igw ]
-}
+#   depends_on = [ aws_internet_gateway.eks_igw ]
+# }
 
 resource "aws_eip" "nat" {
   domain = "vpc"
