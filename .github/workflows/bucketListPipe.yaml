@@ -283,7 +283,8 @@ jobs:
       - name: Build application
         run: npx vite build
         env:
-          TF_LB_DNS: ${{secrets.TF_LB_DNS}}
+          #TF_LB_DNS: ${{secrets.TF_LB_DNS}}
+          TF_LB_DNS: https://dgmgbi3dsb3tqd4wwi7uwfaqhy0nucwf.lambda-url.eu-west-2.on.aws/
           #VITE_APP_BASE_URL: ${{secrets.TF_s3_frontend_url}}
           VITE_APP_ENVIRONMENT: production
 
