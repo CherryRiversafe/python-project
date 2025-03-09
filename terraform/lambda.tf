@@ -2,7 +2,7 @@ resource "aws_lambda_function" "backend_container" {
   function_name = "bucketlist-backend"
   role = aws_iam_role.lambda_role.arn
   package_type = "Image"
-  image_uri = "${aws_ecr_repository.ecr_repo}:latest"
+  image_uri = "${aws_ecr_repository.ecr_repo.repository_url}:latest"
 }
 
 resource "aws_iam_role" "lambda_role" {
