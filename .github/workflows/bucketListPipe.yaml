@@ -130,7 +130,8 @@ jobs:
   #          pytest test_api.py --capture=tee-sys --verbose -vv -s
   docker-backend-ecr:
     runs-on: ubuntu-latest
-    
+    needs: terraform
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
