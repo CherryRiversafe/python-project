@@ -39,6 +39,6 @@ resource "aws_iam_role" "lambda_role" {
 
 
 resource "aws_cloudwatch_log_group" "log_group" {
-    name = "/aws/lambda/${aws_lambda_function.backend_container.name}"
+    name = "/aws/lambda/bucketlist-backend"
     retention_in_days = 14
 }
