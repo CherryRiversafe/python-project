@@ -43,7 +43,7 @@ const Home = ({userId}) => {
         const updatedList = bucketList.filter((_, i) => i !== index);
         setBucketList(updatedList);
         let id = `${userId}${bucketList[index].text}`;
-        axios.delete(`http://bucketlist-alb-425435975.eu-west-2.elb.amazonaws.com/delete_item/${id}`)
+        axios.delete(`https://dgmgbi3dsb3tqd4wwi7uwfaqhy0nucwf.lambda-url.eu-west-2.on.aws/delete_item/${id}`)
             .catch(error => {
                 console.error('Error deleting item:', error);
                 // Revert the change if the API call fails
@@ -58,7 +58,7 @@ const Home = ({userId}) => {
             setListItem('');
         }
     
-        axios.post(`http://bucketlist-alb-425435975.eu-west-2.elb.amazonaws.com/add_item/${userId}`, {
+        axios.post(`https://dgmgbi3dsb3tqd4wwi7uwfaqhy0nucwf.lambda-url.eu-west-2.on.aws/add_item/${userId}`, {
             id: userId + listItem,
             item: listItem,
             checked: false,
@@ -74,7 +74,7 @@ const Home = ({userId}) => {
             )
         );
         let id = `${userId}${bucketList[index].text}`;
-        axios.put(`http://bucketlist-alb-425435975.eu-west-2.elb.amazonaws.com/update_item/${id}`,{
+        axios.put(`https://dgmgbi3dsb3tqd4wwi7uwfaqhy0nucwf.lambda-url.eu-west-2.on.aws/update_item/${id}`,{
             checked: !bucketList[index].checked
          })
     }

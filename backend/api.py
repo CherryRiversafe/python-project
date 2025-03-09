@@ -66,6 +66,7 @@ with app.app_context():
 
 @app.route('/')
 def home():
+    print('root route invoked')
     return({'stat_code': 200})
 
 
