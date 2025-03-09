@@ -27,19 +27,29 @@ resource "aws_iam_role" "lambda_role" {
     })
 }
 
-# resource "aws_iam_role_policy" "lambda_role_policy" {
-#   name = "bucketlist-role-policy"
-#   role = aws_iam_role.lambda_role.id
 
-#   policy = jsonencode({
-#     Version = "2012-10-17"
-#     Statement = [
-#         {
 
-#         }
-#     ]
-#   })
-# }
+resource "aws_iam_role_policy" "lambda_role_policy" {
+  name = "bucketlist-role-policy"
+  role = aws_iam_role.lambda_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+        {
+            Effect = "Allow"
+            Action = [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ]
+            Resource: [
+                "arn:aws:logs:*:*:*"
+            ]
+        }
+    ]
+  })
+}
 
 
 
