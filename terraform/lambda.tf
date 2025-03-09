@@ -5,6 +5,11 @@ resource "aws_lambda_function" "backend_container" {
   image_uri = "${aws_ecr_repository.ecr_repo.repository_url}:latest"
 }
 
+resource "aws_lambda_function_url" "backend_container_url" {
+    function_name = aws_lambda_function.backend_container.function_name
+    authorization_type = "NONE"
+}
+
 resource "aws_iam_role" "lambda_role" {
     name = "bucketlist-lambda-role"
 
