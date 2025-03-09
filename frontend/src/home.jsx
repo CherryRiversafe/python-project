@@ -17,7 +17,7 @@ const Home = ({userId}) => {
             setLoading(true);
             try {
                 //const response = await axios.get(`${import.meta.VITE_APP_BASE_URL}/get_list/${userId}`);
-                const response = await axios.get(`http://bucketlist-alb-425435975.eu-west-2.elb.amazonaws.com/get_list/${userId}`);
+                const response = await axios.get(`https://dgmgbi3dsb3tqd4wwi7uwfaqhy0nucwf.lambda-url.eu-west-2.on.aws/${userId}`);
                 let data = response.data;
                 if (data.length >= 1) {
                     setBucketList(data.map(item => ({ text: item.item, checked: item.checked })));}
