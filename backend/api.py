@@ -10,10 +10,12 @@ app = Flask(__name__)
 CORS(app)
 
 
-tf_db_username = (os.getenv('TF_VAR_DB_USERNAME') or ' ').replace('"','')
+tf_db_username = os.environ('db_user_secret_name')
 print(f'PASSWORD SECRET VAR NAME IS: {tf_db_username}')
-SECRET_NAME_username = (os.getenv('TF_VAR_DB_USERNAME') or ' ').replace('"','')
-SECRET_NAME_passwd = (os.getenv('TF_DB_PASSWORD') or ' ').replace('"', '')
+SECRET_NAME_username = os.environ('db_user_secret_name')
+SECRET_NAME_password = os.environ('db_password_secret_name')
+#SECRET_NAME_username = (os.getenv('TF_VAR_DB_USERNAME') or ' ').replace('"','')
+#SECRET_NAME_passwd = (os.getenv('TF_DB_PASSWORD') or ' ').replace('"', '')
 
 def get_secret(secret_name):
     session = boto3.session.Session()
