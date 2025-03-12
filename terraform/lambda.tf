@@ -9,6 +9,7 @@ resource "aws_lambda_function" "backend_container" {
     variables = {
       db_user_secret_name = aws_secretsmanager_secret.db_user.name
       db_password_secret_name = aws_secretsmanager_secret.rds_password_secret.name
+      rds_endpoint = aws_db_instance.my_bucket_list.address 
     }
   }
 
