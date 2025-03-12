@@ -123,7 +123,7 @@ def delete_item(item_id):
     db.session.commit()
     return {"message": "Item deleted."}, 200
 
-def handler(event, context):
+def lambda_handler(event, context):
     return serverless_wsgi.handle_request(app, event, context)
 
 #if __name__ == '__main__':
