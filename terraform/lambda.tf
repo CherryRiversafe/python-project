@@ -87,7 +87,7 @@ resource "aws_iam_role_policy" "lambda_role_policy" {
         {
             Effect = "Allow"
             Action = [
-                "secretsmanager:GetSecret"
+                "secretsmanager:GetSecretValue"
             ],
             Resource = [
                 aws_secretsmanager_secret.rds_password_secret.arn,
