@@ -87,7 +87,7 @@ resource "aws_vpc_security_group_egress_rule" "allow_any_outbound" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_ipv4   = "0.0.0.0/0"
     
 } 
 
