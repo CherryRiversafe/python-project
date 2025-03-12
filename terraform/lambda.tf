@@ -11,10 +11,21 @@ resource "aws_lambda_function" "backend_container" {
   }
 }
 
+
 resource "aws_lambda_function_url" "backend_container_url" {
-    function_name = aws_lambda_function.backend_container.function_name
-    authorization_type = "NONE"
+  function_name      = aws_lambda_function.backend_container.function_name
+  authorization_type = "NONE"
+
+  cors {
+    allow_credentials = true
+    allow_origins     = ["http://bucketlist-frontend-2025.s3-website.eu-west-2.amazonaws.com"]
+    allow_methods     = ["GET", "POST", "PUT", "DELETE"]
+    allow_headers     = ["Content-Type"]
+    expose_headers    = ["Date", "x-amzn-RequestId"]
+    max_age           = 3600
+  }
 }
+
 
 resource "aws_iam_role" "lambda_role" {
     name = "bucketlist-lambda-role"
