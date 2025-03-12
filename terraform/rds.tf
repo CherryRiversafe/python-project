@@ -84,7 +84,6 @@ resource "aws_vpc_security_group_ingress_rule" "allow_http_access" {
 resource "aws_vpc_security_group_egress_rule" "allow_any_outbound" {
   security_group_id = aws_security_group.rds_sec_group.id
   referenced_security_group_id = aws_security_group.rds_sec_group.id
-    cidr_ipv4   = "0.0.0.0/0"
     from_port   = 0
     to_port     = 0
     ip_protocol    = "-1"
