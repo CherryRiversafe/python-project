@@ -4,6 +4,7 @@ from flask_cors import CORS
 from sqlalchemy_utils import database_exists, create_database
 import boto3
 import os
+import serverless_wsgi
 
 
 app = Flask(__name__)
@@ -123,8 +124,7 @@ def delete_item(item_id):
     return {"message": "Item deleted."}, 200
 
 def handler(event, context):
-    print("handler invoked")
-    return({'stat_code': 200})
+    return serverless_wsgi.handle_request(app, event, context)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
