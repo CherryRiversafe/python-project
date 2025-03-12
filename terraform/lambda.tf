@@ -3,6 +3,12 @@ resource "aws_lambda_function" "backend_container" {
   role = aws_iam_role.lambda_role.arn
   package_type = "Image"
   image_uri = "${aws_ecr_repository.ecr_repo.repository_url}:latest"
+
+   vpc_config {
+    # Every subnet should be able to reach an EFS mount target in the same Availability Zone. Cross-AZ mounts are not permitted.
+    subnet_ids         = [aws_subnet.public[0].id]
+    security_group_ids = [aws_security_group.rds_sec_group.id]
+  }
 }
 
 resource "aws_lambda_function_url" "backend_container_url" {
