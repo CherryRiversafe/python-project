@@ -56,12 +56,23 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: eu-west-2
 
+      - name: Retrieve Image Digest
+        id: get_digest
+        run: |
+          digest=$(aws ecr describe-images \
+            --repository-name bucketlist-repository \
+            --image-ids imageTag=latest \
+            --query 'imageDetails[0].imageDigest' \
+            --output text)
+          echo "IMAGE_DIGEST=${digest}" >> $GITHUB_ENV
 
       - name: Terraform Init
         run: terraform init
 
       - name: Terraform Plan
-        run: terraform plan -var="db_username=${{ env.TF_VAR_DB_USERNAME }}"
+        env:
+          IMAGE_DIGEST: ${{ env.IMAGE_DIGEST }}
+        run: terraform plan -var="db_username=${{ env.TF_VAR_DB_USERNAME }}" -var"image_digest=${{ env.IMAGE_DIGEST }}"
 
 
       - name: Terraform Apply
@@ -154,6 +165,8 @@ jobs:
           cd backend
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+      
 
   # docker-backend:
 
