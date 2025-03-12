@@ -72,7 +72,7 @@ jobs:
       - name: Terraform Plan
         env:
           IMAGE_DIGEST: ${{ env.IMAGE_DIGEST }}
-        run: terraform plan -var="db_username=${{ env.TF_VAR_DB_USERNAME }}" -var"image_digest=${{ env.IMAGE_DIGEST }}"
+        run: terraform plan -var="db_username=${{ env.TF_VAR_DB_USERNAME }}" -var="image_digest=${{ env.IMAGE_DIGEST }}"
 
 
       - name: Terraform Apply
