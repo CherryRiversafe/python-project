@@ -29,7 +29,7 @@ def get_secret(secret_name):
         return None
     
 secret_username = get_secret(SECRET_NAME_username)
-secret_password = get_secret(SECRET_NAME_passwd)
+secret_password = get_secret(SECRET_NAME_password)
 
 rds_endpoint = (os.getenv('TF_RDS_ENDPOINT') or '').replace('"','')
 
