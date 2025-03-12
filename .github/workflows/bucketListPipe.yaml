@@ -77,7 +77,7 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -var="db_username=${{ env.TF_VAR_DB_USERNAME }}"
+        run: terraform apply -auto-approve -var="db_username=${{ env.TF_VAR_DB_USERNAME }}" -var="image_digest=${{ env.IMAGE_DIGEST }}"
 
       - name: Install GitHub CLI
         run: |
