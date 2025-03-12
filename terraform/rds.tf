@@ -88,7 +88,7 @@ resource "aws_vpc_security_group_egress_rule" "allow_any_outbound" {
 }
     
     
-} 
+
 
 
 
