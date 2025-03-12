@@ -5,11 +5,11 @@ resource "aws_lambda_function" "backend_container" {
   image_uri = "${aws_ecr_repository.ecr_repo.repository_url}:latest"
   timeout = 15
 
-   vpc_config {
-    # Every subnet should be able to reach an EFS mount target in the same Availability Zone. Cross-AZ mounts are not permitted.
-    subnet_ids         = ["subnet-9826f9e2"]
-    security_group_ids = [aws_security_group.rds_sec_group.id]
-  }
+#    vpc_config {
+#     # Every subnet should be able to reach an EFS mount target in the same Availability Zone. Cross-AZ mounts are not permitted.
+#     subnet_ids         = ["subnet-9826f9e2"]
+#     security_group_ids = [aws_security_group.rds_sec_group.id]
+#   }
 }
 
 
