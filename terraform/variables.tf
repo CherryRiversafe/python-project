@@ -27,6 +27,6 @@ variable "db_username" {
 
 variable "image_digest" {
   description = "digest of the container image to deploy to lambda"
-  type = "string"
+  type = string
 }
 
