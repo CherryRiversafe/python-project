@@ -9,6 +9,9 @@ import os
 app = Flask(__name__)
 CORS(app)
 
+
+tf_db_username = (os.getenv('TF_VAR_DB_USERNAME') or ' ').replace('"','')
+print(f'PASSWORD SECRET VAR NAME IS: {tf_db_username}')
 SECRET_NAME_username = (os.getenv('TF_VAR_DB_USERNAME') or ' ').replace('"','')
 SECRET_NAME_passwd = (os.getenv('TF_DB_PASSWORD') or ' ').replace('"', '')
 
