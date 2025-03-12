@@ -49,8 +49,17 @@ resource "aws_iam_role_policy" "lambda_role_policy" {
                 "logs:CreateLogStream",
                 "logs:PutLogEvents"
             ]
-            Resource: [
+            Resource = [
                 "arn:aws:logs:*:*:*"
+            ]
+        },
+        {
+            Effect = "Allow"
+            Action = [
+                "ec2:CreateNetworkInterface"
+            ]
+            Resource = [
+                "*"
             ]
         }
     ]
