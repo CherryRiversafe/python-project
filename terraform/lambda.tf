@@ -5,6 +5,10 @@ resource "aws_lambda_function" "backend_container" {
   image_uri = "${aws_ecr_repository.ecr_repo.repository_url}:latest"
   timeout = 15
 
+  lifecycle {
+    ignore_changes = [image_uri]
+  }
+
   environment {
     variables = {
       db_user_secret_name = aws_secretsmanager_secret.db_user.name
