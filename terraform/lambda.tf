@@ -56,7 +56,8 @@ resource "aws_iam_role_policy" "lambda_role_policy" {
         {
             Effect = "Allow"
             Action = [
-                "ec2:CreateNetworkInterface"
+                "ec2:CreateNetworkInterface",
+                "ec2:DescribeNetworkInterfaces"
             ]
             Resource = [
                 "*"
