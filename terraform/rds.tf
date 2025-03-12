@@ -75,7 +75,7 @@ resource "aws_vpc_security_group_ingress_rule" "allow_postgres_access" {
 
 resource "aws_vpc_security_group_ingress_rule" "allow_http_access" {
   security_group_id = aws_security_group.rds_sec_group.id
-  cidr_ipv4          = "188.74.98.128/32"
+  cidr_ipv4          = "0.0.0.0/0"
   from_port         = 443
   ip_protocol       = "tcp"
   to_port           = 443
