@@ -122,7 +122,9 @@ def delete_item(item_id):
     db.session.commit()
     return {"message": "Item deleted."}, 200
 
-
+def handler(event, context):
+    print("handler invoked")
+    return({'stat_code': 200})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
