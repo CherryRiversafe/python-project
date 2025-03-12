@@ -57,12 +57,28 @@ resource "aws_security_group" "rds_sec_group" {
   name        = "bucket-list-rds"
   description = "Allow local traffic to rds"
   vpc_id      = "vpc-a3ce40cb"
-  ingress{
+  ingress {
     cidr_blocks         = ["188.74.98.128/32"]
     from_port         = 5432
     protocol       = "tcp"
     to_port           = 5432
   }
 }
+
+resource "aws_vpc_security_group_ingress_rule" "allow_postgres_access" {
+  security_group_id = aws_security_group.rds_sec_group.id
+  referenced_security_group_id = aws_security_group.rds_sec_group.id
+  from_port         = 5432
+  ip_protocol       = "tcp"
+  to_port           = 5432
+} 
+
+resource "aws_vpc_security_group_ingress_rule" "allow_http_access" {
+  security_group_id = aws_security_group.rds_sec_group.id
+  cidr_ipv4          = "188.74.98.128/32"
+  from_port         = 443
+  ip_protocol       = "tcp"
+  to_port           = 443
+} 
 
 
