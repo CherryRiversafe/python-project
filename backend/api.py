@@ -31,7 +31,7 @@ def get_secret(secret_name):
 secret_username = get_secret(SECRET_NAME_username)
 secret_password = get_secret(SECRET_NAME_password)
 
-rds_endpoint = os.environ['rds-endpoint']
+rds_endpoint = os.environ['rds_endpoint']
 # rds_endpoint = (os.getenv('TF_RDS_ENDPOINT') or '').replace('"','')
 
 db_name = 'bucketListDB'
