@@ -6,7 +6,7 @@ resource "aws_lambda_function" "backend_container" {
 
    vpc_config {
     # Every subnet should be able to reach an EFS mount target in the same Availability Zone. Cross-AZ mounts are not permitted.
-    subnet_ids         = [aws_subnet.public[0].id]
+    subnet_ids         = ["subnet-9826f9e2"]
     security_group_ids = [aws_security_group.rds_sec_group.id]
   }
 }
