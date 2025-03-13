@@ -103,6 +103,7 @@ def update_item(id):
 
 @app.route('/get_list/<user_id>', methods=['GET'])
 def get_list(user_id):
+    print("get list invoked")
     try:
         items = BucketListTable.query.filter_by(user_id=user_id).all()
         if items:
