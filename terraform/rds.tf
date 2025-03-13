@@ -35,7 +35,7 @@ resource "aws_secretsmanager_secret_version" "api_user" {
 resource "aws_db_instance" "my_bucket_list" {
   identifier             = "mybucketlist"
   instance_class         = "db.t3.micro"
-  allocated_storage      = 2
+  allocated_storage      = 5
   engine                 = "postgres"
   username               = var.db_username
   password               = aws_secretsmanager_secret_version.rds_password_secret_version.secret_string
