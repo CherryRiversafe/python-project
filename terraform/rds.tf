@@ -46,7 +46,7 @@ resource "aws_db_instance" "my_bucket_list" {
 
 resource "aws_db_subnet_group" "rds_subnet_group" {
   name = "rds-subnet-group"
-  subnet_ids = [aws_subnet.public[*].id]
+  subnet_ids = aws_subnet.public[*].id
 }
 
 resource "aws_db_parameter_group" "my_bucket_list" {
