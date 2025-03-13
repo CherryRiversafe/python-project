@@ -58,10 +58,10 @@ class BucketListTable(db.Model):
         }
 
 
-if not database_exists(full_db_url):
-    create_database(full_db_url)
-else:
-    print("No updates were necessary.")
+# if not database_exists(full_db_url):
+#     create_database(full_db_url)
+# else:
+#     print("No updates were necessary.")
 
 # Create all tables in the database based on the models
 with app.app_context():
