@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+const BASEURL = 'https://xispcomnzfl7kwewhudpidrraq0ycktm.lambda-url.eu-west-2.on.aws/';
+
 const Home = ({userId}) => {
     const [listItem, setListItem] = useState('');
     const [bucketList, setBucketList] = useState([]);
@@ -17,7 +19,7 @@ const Home = ({userId}) => {
             setLoading(true);
             try {
                 //const response = await axios.get(`${import.meta.VITE_APP_BASE_URL}/get_list/${userId}`);
-                const response = await axios.get(`https://dgmgbi3dsb3tqd4wwi7uwfaqhy0nucwf.lambda-url.eu-west-2.on.aws/${userId}`);
+                const response = await axios.get(`${BASEURL}${userId}`);
                 let data = response.data;
                 if (data.length >= 1) {
                     setBucketList(data.map(item => ({ text: item.item, checked: item.checked })));}
@@ -43,7 +45,7 @@ const Home = ({userId}) => {
         const updatedList = bucketList.filter((_, i) => i !== index);
         setBucketList(updatedList);
         let id = `${userId}${bucketList[index].text}`;
-        axios.delete(`https://dgmgbi3dsb3tqd4wwi7uwfaqhy0nucwf.lambda-url.eu-west-2.on.aws/delete_item/${id}`)
+        axios.delete(`${BASEURL}delete_item/${id}`)
             .catch(error => {
                 console.error('Error deleting item:', error);
                 // Revert the change if the API call fails
@@ -58,7 +60,7 @@ const Home = ({userId}) => {
             setListItem('');
         }
     
-        axios.post(`https://dgmgbi3dsb3tqd4wwi7uwfaqhy0nucwf.lambda-url.eu-west-2.on.aws/add_item/${userId}`, {
+        axios.post(`${BASEURL}add_item/${userId}`, {
             id: userId + listItem,
             item: listItem,
             checked: false,
@@ -74,7 +76,7 @@ const Home = ({userId}) => {
             )
         );
         let id = `${userId}${bucketList[index].text}`;
-        axios.put(`https://dgmgbi3dsb3tqd4wwi7uwfaqhy0nucwf.lambda-url.eu-west-2.on.aws/update_item/${id}`,{
+        axios.put(`${BASEURL}update_item/${id}`,{
             checked: !bucketList[index].checked
          })
     }
