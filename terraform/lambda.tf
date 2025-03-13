@@ -13,6 +13,7 @@ resource "aws_lambda_function" "backend_container" {
       rds_endpoint = aws_db_instance.my_bucket_list.address 
     }
   }
+  
 
 #    vpc_config {
 #     # Every subnet should be able to reach an EFS mount target in the same Availability Zone. Cross-AZ mounts are not permitted.
@@ -28,7 +29,7 @@ resource "aws_lambda_function_url" "backend_container_url" {
 
   cors {
     allow_credentials = true
-    allow_origins     = ["http://bucketlist-frontend-2025.s3-website.eu-west-2.amazonaws.com"]
+    allow_origins     = ["*"]
     allow_methods     = ["GET", "POST", "PUT", "DELETE"]
     allow_headers     = ["Content-Type"]
     expose_headers    = ["Date", "x-amzn-RequestId"]
