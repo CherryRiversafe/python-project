@@ -127,7 +127,8 @@ def delete_item(item_id):
 def handler(event, context):
     print("handler invoked")
     return {
-        'statusCode': 200
+        'statusCode': 200,
+        'message': 'successfully invoked'
     }
 
     #return serverless_wsgi.handle_request(app, event, context)
