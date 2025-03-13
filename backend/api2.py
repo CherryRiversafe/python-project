@@ -8,7 +8,7 @@ import serverless_wsgi
 
 
 app = Flask(__name__)
-CORS(app)
+#CORS(app)
 
 
 tf_db_username = os.environ['db_user_secret_name']
