@@ -41,6 +41,12 @@ resource "aws_db_instance" "my_bucket_list" {
   vpc_security_group_ids = [aws_security_group.rds_sec_group.id]
   publicly_accessible    = true
   skip_final_snapshot    = true
+  db_subnet_group_name = aws_db_subnet_group.rds_subnet_group.name
+}
+
+resource "aws_db_subnet_group" "rds_subnet_group" {
+  name = "rds-subnet-group"
+  subnet_ids = ["subnet-9826f9e2", "subnet-63e9042f"]
 }
 
 resource "aws_db_parameter_group" "my_bucket_list" {
