@@ -3,7 +3,7 @@ resource "aws_lambda_function" "backend_container" {
   role = aws_iam_role.lambda_role.arn
   package_type = "Image"
   image_uri = "${aws_ecr_repository.ecr_repo.repository_url}@${var.image_digest}"
-  timeout = 15
+  timeout = 60
 
   environment {
     variables = {
