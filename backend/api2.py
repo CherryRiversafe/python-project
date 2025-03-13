@@ -112,11 +112,11 @@ def get_list(user_id):
             response = {
                 'statusCode': 200,
                 'body': jsonify([item.to_dict() for item in items]),
-                'headers': {
-                    'Access-Control-Allow-Origin': '*', 
-                    'Access-Control-Allow-Methods': 'OPTIONS, GET',
-                    'Access-Control-Allow-Headers': 'Content-Type,Authorization'
-                }
+                # 'headers': {
+                #     'Access-Control-Allow-Origin': '*', 
+                #     'Access-Control-Allow-Methods': 'OPTIONS, GET',
+                #     'Access-Control-Allow-Headers': 'Content-Type,Authorization'
+                # }
             }
             return response
             #return jsonify([item.to_dict() for item in items]), 200
