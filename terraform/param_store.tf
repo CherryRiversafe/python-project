@@ -13,10 +13,10 @@ resource "aws_ssm_parameter" "cognito_client_id" {
 }
 
 
-resource "aws_ssm_parameter" "rds_name" {
-  name  = "rds-name"
-  type  = "String"
-  value = aws_db_instance.my_bucket_list.identifier
-}
+# resource "aws_ssm_parameter" "rds_name" {
+#   name  = "rds-name"
+#   type  = "String"
+#   value = aws_db_instance.my_bucket_list.identifier
+# }
 
 
