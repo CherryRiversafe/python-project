@@ -8,7 +8,7 @@ COPY requirements.txt .
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt --target "${LAMBDA_TASK_ROOT}"
 
-COPY  api.py .
+#COPY  api.py .
 
 #EXPOSE 5000
 
