@@ -20,10 +20,10 @@ variable "user_pool_name" {
     default = "bucketlist-user-pool"
 }
 
-# variable "db_username" {
-#   description = "db service username"
-#   type        = string
-# }
+variable "db_username" {
+  description = "db service username"
+  type        = string
+}
 
 variable "image_digest" {
   description = "digest of the container image to deploy to lambda"
