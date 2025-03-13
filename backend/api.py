@@ -11,7 +11,7 @@ app = Flask(__name__)
 CORS(app)
 
 
-tf_db_username = os.environ['db_user_secret_name']
+tf_db_username = os.environt['db_user_secret_name']
 print(f'USERNAME SECRET VAR NAME IS: {tf_db_username}')
 SECRET_NAME_username = os.environ['db_user_secret_name']
 SECRET_NAME_password = os.environ['db_password_secret_name']
