@@ -1,4 +1,47 @@
-from flask import Flask
+from flask import Flask,jsonify, request
+from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
+from sqlalchemy_utils import database_exists, create_database
+import boto3
+import os
+import serverless_wsgi
+
+
+app = Flask(__name__)
+CORS(app)
+
+
+tf_db_username = os.environ['db_user_secret_name']
+print(f'USERNAME SECRET VAR NAME IS: {tf_db_username}')
+SECRET_NAME_username = os.environ['db_user_secret_name']
+SECRET_NAME_password = os.environ['db_password_secret_name']
+#SECRET_NAME_username = (os.getenv('TF_VAR_DB_USERNAME') or ' ').replace('"','')
+#SECRET_NAME_passwd = (os.getenv('TF_DB_PASSWORD') or ' ').replace('"', '')
+
+def get_secret(secret_name):
+    session = boto3.session.Session()
+    client = session.client(service_name='secretsmanager', region_name='eu-west-2')
+    try:
+        response = client.get_secret_value(SecretId=secret_name)
+        if 'SecretString' in response:
+            return response['SecretString']
+    except Exception as e:
+        print(e)
+        return None
+    
+secret_username = get_secret(SECRET_NAME_username)
+secret_password = get_secret(SECRET_NAME_password)
+
+rds_endpoint = os.environ['rds_endpoint']
+# rds_endpoint = (os.getenv('TF_RDS_ENDPOINT') or '').replace('"','')
+
+db_name = 'bucketListDB'
+full_db_url = f'postgresql://{secret_username}:{secret_password}@{rds_endpoint}/{db_name}'
+
+app.config['SQLALCHEMY_DATABASE_URI'] = (full_db_url)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
 
 
 app = Flask(__name__)
