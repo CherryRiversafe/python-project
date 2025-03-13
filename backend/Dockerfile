@@ -13,4 +13,4 @@ COPY  api.py .
 #EXPOSE 5000
 
 #CMD ["python", "api.py"]
-CMD ["api.handler"]
+CMD ["app.handler"]
