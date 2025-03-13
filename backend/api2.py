@@ -37,7 +37,7 @@ print(f"rds endpoint:{rds_endpoint}, username:{secret_username}, password:{secre
 # rds_endpoint = (os.getenv('TF_RDS_ENDPOINT') or '').replace('"','')
 
 db_name = 'bucketListDB'
-full_db_url = f'postgresql://{secret_username}:{secret_password}@{rds_endpoint}/{db_name}'
+full_db_url = f'postgresql://{secret_username}:{secret_password}@{rds_endpoint}:5432/{db_name}'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = (full_db_url)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
