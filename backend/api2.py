@@ -38,6 +38,7 @@ print(f"rds endpoint:{rds_endpoint}, username:{secret_username}, password:{secre
 
 db_name = 'bucketListDB'
 full_db_url = f'postgresql://{secret_username}:{secret_password}@{rds_endpoint}:5432/{db_name}'
+print(full_db_url)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = (full_db_url)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -62,6 +63,7 @@ class BucketListTable(db.Model):
 
 if not database_exists(full_db_url):
     create_database(full_db_url)
+    print("if part works")
 else:
     print("No updates were necessary.")
 
