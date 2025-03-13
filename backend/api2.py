@@ -33,6 +33,7 @@ secret_username = get_secret(SECRET_NAME_username)
 secret_password = get_secret(SECRET_NAME_password)
 
 rds_endpoint = os.environ['rds_endpoint']
+print(f"rds endpoint:{rds_endpoint}, username:{secret_username}, password:{secret_password}")
 # rds_endpoint = (os.getenv('TF_RDS_ENDPOINT') or '').replace('"','')
 
 db_name = 'bucketListDB'
@@ -56,17 +57,18 @@ class BucketListTable(db.Model):
             'item': self.item,
             'checked': self.checked,
         }
+    print("to_dict done")
 
 
-# if not database_exists(full_db_url):
-#     create_database(full_db_url)
-# else:
-#     print("No updates were necessary.")
+if not database_exists(full_db_url):
+    create_database(full_db_url)
+else:
+    print("No updates were necessary.")
 
 # Create all tables in the database based on the models
-with app.app_context():
-    db.create_all()
-    print("Tables created successfully.")
+# with app.app_context():
+#     db.create_all()
+#     print("Tables created successfully.")
 
 
 def handler(event, context):
