@@ -69,9 +69,6 @@ with app.app_context():
     print("Tables created successfully.")
 
 
-
-app = Flask(__name__)
-
 def handler(event, context):
     print("handler invoked")
     return {
