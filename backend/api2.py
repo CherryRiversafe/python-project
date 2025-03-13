@@ -43,6 +43,32 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+class BucketListTable(db.Model):
+    __tablename__ = "Bucket_List"
+    id = db.Column(db.String, primary_key=True)
+    user_id = db.Column(db.String)
+    item = db.Column(db.String)
+    checked = db.Column(db.Boolean)
+    def to_dict(self):
+        return {
+            'id' :self.id,
+            'user_id': self.user_id,
+            'item': self.item,
+            'checked': self.checked,
+        }
+
+
+if not database_exists(full_db_url):
+    create_database(full_db_url)
+else:
+    print("No updates were necessary.")
+
+# Create all tables in the database based on the models
+with app.app_context():
+    db.create_all()
+    print("Tables created successfully.")
+
+
 
 app = Flask(__name__)
 
