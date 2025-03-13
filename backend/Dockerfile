@@ -13,4 +13,4 @@ RUN pip install -r requirements.txt --target "${LAMBDA_TASK_ROOT}"
 #EXPOSE 5000
 
 #CMD ["python", "api.py"]
-CMD ["api.handler"]
+CMD ["api2.handler"]
