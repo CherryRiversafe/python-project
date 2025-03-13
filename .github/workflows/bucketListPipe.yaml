@@ -104,14 +104,14 @@ jobs:
       #     gh secret set TF_LB_DNS -b"$TF_LB_DNS" -R CherryRiversafe/python-project
 
     
-      - name: Set secret from Terraform db endpoint
-        run: |
-             db_endpoint=$(terraform output -raw rds_endpoint)
-             gh secret set TF_rds_endpoint -b"$db_endpoint" -R CherryRiversafe/python-project
-             s3_frontend_url=$(terraform output -raw s3_frontend_url)
-             gh secret set TF_s3_frontend_url -b"$s3_frontend_url" -R CherryRiversafe/python-project
-             s3_frontend_bucketname=$(terraform output -raw s3_frontend_bucketname)
-             gh secret set TF_s3_frontend_bucketname -b"$s3_frontend_bucketname" -R CherryRiversafe/python-project
+      # - name: Set secret from Terraform db endpoint
+      #   run: |
+      #        db_endpoint=$(terraform output -raw rds_endpoint)
+      #        gh secret set TF_rds_endpoint -b"$db_endpoint" -R CherryRiversafe/python-project
+      #        s3_frontend_url=$(terraform output -raw s3_frontend_url)
+      #        gh secret set TF_s3_frontend_url -b"$s3_frontend_url" -R CherryRiversafe/python-project
+      #        s3_frontend_bucketname=$(terraform output -raw s3_frontend_bucketname)
+      #        gh secret set TF_s3_frontend_bucketname -b"$s3_frontend_bucketname" -R CherryRiversafe/python-project
           
   # unit-test-backend:
   #   name: "Prepare python environment"
