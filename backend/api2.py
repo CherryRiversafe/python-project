@@ -68,9 +68,9 @@ else:
     print("No updates were necessary.")
 
 # Create all tables in the database based on the models
-# with app.app_context():
-#     db.create_all()
-#     print("Tables created successfully.")
+with app.app_context():
+    db.create_all()
+    print("Tables created successfully.")
 
 @app.route('/')
 def home():
