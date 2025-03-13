@@ -34,7 +34,7 @@ resource "aws_secretsmanager_secret_version" "api_user" {
 resource "aws_db_instance" "my_bucket_list" {
   identifier             = "mybucketlist"
   instance_class         = "db.t3.micro"
-  allocated_storage      = 5
+  allocated_storage      = 2
   engine                 = "postgres"
   username               = var.db_username
   password               = aws_secretsmanager_secret_version.rds_password_secret_version.secret_string
@@ -46,7 +46,7 @@ resource "aws_db_instance" "my_bucket_list" {
 
 resource "aws_db_subnet_group" "rds_subnet_group" {
   name = "rds-subnet-group"
-  subnet_ids = ["subnet-9826f9e2", "subnet-63e9042f"]
+  subnet_ids = [aws_subnet.public[*].id]
 }
 
 resource "aws_db_parameter_group" "my_bucket_list" {
@@ -62,7 +62,7 @@ resource "aws_db_parameter_group" "my_bucket_list" {
 resource "aws_security_group" "rds_sec_group" {
   name        = "bucket-list-rds"
   description = "Allow local traffic to rds"
-  vpc_id      = "vpc-a3ce40cb"
+  vpc_id      = aws_vpc.rds_vpc.id
 }
 
 resource "aws_vpc_security_group_ingress_rule" "allow_postgres_access" {
