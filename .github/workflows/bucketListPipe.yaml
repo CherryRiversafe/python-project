@@ -93,21 +93,20 @@ jobs:
           gitRepo_token: ${{secrets.GIT_TOKEN}}
         run: echo "$gitRepo_token" | gh auth login --with-token
 
-      # - name: Set secret from Terraform db passwd
-      #   run: |
-      #       rds_password=$(terraform output -raw DB_PASSWORD)
-      #       gh secret set TF_DB_PASSWORD -b"$rds_password" -R CherryRiversafe/python-project
-      
-      # - name: Capture Terraform output
-      #   run: |
-      #     TF_LB_DNS=$(terraform output -raw alb_dns_name)
-      #     gh secret set TF_LB_DNS -b"$TF_LB_DNS" -R CherryRiversafe/python-project
-      #    db_endpoint=$(terraform output -raw rds_endpoint)
-      #     gh secret set TF_rds_endpoint -b"$db_endpoint" -R CherryRiversafe/python-project
-    
+      - name: Set secret from Terraform db passwd
+        run: |
+            rds_password=$(terraform output -raw DB_PASSWORD)
+            gh secret set TF_DB_PASSWORD -b"$rds_password" -R CherryRiversafe/python-project
+       
+      - name: Capture Terraform output
+        run: |
+          TF_LB_DNS=$(terraform output -raw alb_dns_name)
+          gh secret set TF_LB_DNS -b"$TF_LB_DNS" -R CherryRiversafe/python-project
+          
       - name: Set secret from Terraform db endpoint
         run: |
-        
+            db_endpoint=$(terraform output -raw rds_endpoint)
+            gh secret set TF_rds_endpoint -b"$db_endpoint" -R CherryRiversafe/python-project
             s3_frontend_url=$(terraform output -raw s3_frontend_url)
             gh secret set TF_s3_frontend_url -b"$s3_frontend_url" -R CherryRiversafe/python-project
             s3_frontend_bucketname=$(terraform output -raw s3_frontend_bucketname)
