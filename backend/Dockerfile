@@ -1,5 +1,5 @@
 #FROM python:3.9.21-alpine3.21
-public.ecr.aws/lambda/python:3.7
+FROM public.ecr.aws/lambda/python:3.7
 
 #WORKDIR '/project-1'
 COPY . ${LAMBDA_TASK_ROOT}
