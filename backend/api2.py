@@ -113,7 +113,7 @@ def get_list(user_id):
                 'body': jsonify([item.to_dict() for item in items]),
                 'headers': {
                     'Access-Control-Allow-Origin': '*', 
-                    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+                    'Access-Control-Allow-Methods': 'OPTIONS, GET',
                     'Access-Control-Allow-Headers': 'Content-Type,Authorization'
                 }
             }
